@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verified GIF Studio - Update Log</title>
+    <title>Verified GIF Studio - News Log</title>
     <style>
         * {
             margin: 0;
@@ -45,7 +45,7 @@
             font-size: 1.2rem;
         }
         .navbar-brand .logo {
-            background: #0548ff;
+            background: #89CFF0;
             width: 32px;
             height: 32px;
             border-radius: 8px;
@@ -54,7 +54,7 @@
             justify-content: center;
             font-weight: 900;
             font-size: 1rem;
-            color: white;
+            color: #0d1117;
         }
         .navbar-brand span {
             color: #8b949e;
@@ -160,12 +160,12 @@
             gap: 10px;
         }
         .log-header h1 span {
-            background: #238636;
+            background: #89CFF0;
             font-size: 0.8rem;
             font-weight: 500;
             padding: 0.2rem 0.9rem;
             border-radius: 30px;
-            color: white;
+            color: #0d1117;
         }
         .log-header .badge {
             background: #21262d;
@@ -185,7 +185,7 @@
             background: #0d1117;
             border-radius: 18px;
             padding: 1.2rem 1.5rem;
-            border-left: 4px solid #238636;
+            border-left: 4px solid #89CFF0;
             border: 1px solid #30363d;
             transition: background 0.15s;
         }
@@ -228,8 +228,10 @@
             margin-bottom: 0.2rem;
         }
         .update-description li::marker {
-            color: #238636;
+            color: #89CFF0;
         }
+
+        /* ===== TAGS - MORE OPTIONS ===== */
         .tag {
             font-size: 0.65rem;
             font-weight: 600;
@@ -239,9 +241,14 @@
             letter-spacing: 0.4px;
             margin-left: 4px;
             vertical-align: middle;
+            display: inline-block;
         }
-        .tag-new {
-            background: #1f6feb;
+        .tag-news {
+            background: #89CFF0;
+            color: #0d1117;
+        }
+        .tag-update {
+            background: #238636;
             color: white;
         }
         .tag-fix {
@@ -251,6 +258,34 @@
         .tag-improve {
             background: #d29922;
             color: #0d1117;
+        }
+        .tag-feature {
+            background: #7c3aed;
+            color: white;
+        }
+        .tag-announcement {
+            background: #f59e0b;
+            color: #0d1117;
+        }
+        .tag-important {
+            background: #ef4444;
+            color: white;
+        }
+        .tag-tip {
+            background: #3b82f6;
+            color: white;
+        }
+        .tag-security {
+            background: #8b5cf6;
+            color: white;
+        }
+        .tag-performance {
+            background: #06b6d4;
+            color: #0d1117;
+        }
+        .tag-event {
+            background: #ec4899;
+            color: white;
         }
 
         /* ===== ADMIN PANEL (Popup/Modal Style) ===== */
@@ -421,8 +456,8 @@
         }
 
         .hardcoded-notice {
-            background: #1f6feb22;
-            border: 1px solid #1f6feb;
+            background: #89CFF022;
+            border: 1px solid #89CFF0;
             border-radius: 12px;
             padding: 0.8rem 1rem;
             margin-bottom: 1rem;
@@ -430,7 +465,7 @@
             font-size: 0.85rem;
         }
         .hardcoded-notice strong {
-            color: #58a6ff;
+            color: #89CFF0;
         }
 
         .tag-selector {
@@ -553,7 +588,7 @@
         <a href="#" class="navbar-brand">
             <div class="logo">VGS</div>
             Verified GIF Studio
-            <span>· Update Log</span>
+            <span>· News Log</span>
         </a>
         <div class="navbar-links">
             <a href="#" class="active">Home</a>
@@ -570,18 +605,18 @@
     <div class="main-content">
         <div class="log-container">
             <div class="log-header">
-                <h1>Update Log <span>Latest</span></h1>
-                <div class="badge">Update List</div>
+                <h1>News Log <span>Latest Updates</span></h1>
+                <div class="badge">📰 News Feed</div>
             </div>
             <div class="update-timeline" id="logTimeline">
-                <div class="loading">Loading updates...</div>
+                <div class="loading">Loading news...</div>
             </div>
         </div>
     </div>
 
     <!-- ===== FOOTER ===== -->
     <div class="footer">
-        <span>Verified GIF Studio Log - &copy; Hercule & TAXI LAC</span><br>
+        <span>Verified GIF Studio News Log - &copy; Hercule & TAXI LAC</span><br>
         
         <a href="https://verifiedgifstudio.github.io" target="_blank">Visit Website</a>
     </div>
@@ -590,12 +625,12 @@
     <div class="admin-overlay" id="adminOverlay">
         <div class="admin-panel">
             <div class="admin-panel-header">
-                <h2>Admin Panel - Manage Updates</h2>
+                <h2>Admin Panel - Manage News</h2>
                 <button class="close-btn" id="closeAdminBtn">&times;</button>
             </div>
 
             <div class="hardcoded-notice">
-                <strong>Configured</strong>
+                <strong>Configured</strong> - News stored on GitHub Gist
             </div>
 
             <div id="adminContent">
@@ -608,8 +643,8 @@
                 <div id="adminForm" style="display: none;">
                     <div class="admin-row">
                         <div class="field-group">
-                            <label for="versionInput">Version</label>
-                            <input type="text" id="versionInput" placeholder="e.g. v2.4.0" />
+                            <label for="versionInput">Title / Version</label>
+                            <input type="text" id="versionInput" placeholder="e.g. v2.4.0 or 'New Feature Release'" />
                         </div>
                         <div class="field-group">
                             <label for="dateInput">Date (YYYY-MM-DD)</label>
@@ -617,20 +652,28 @@
                         </div>
                     </div>
 
-                    <label for="descInput">Description (one item per line, use '-' for bullets)</label>
-                    <textarea id="descInput" placeholder="- New feature: export to SVG&#10;- Fixed loading issue"></textarea>
+                    <label for="descInput">News Content (one item per line, use '-' for bullets)</label>
+                    <textarea id="descInput" placeholder="- New feature: export to SVG&#10;- Fixed loading issue&#10;- Community event announced"></textarea>
 
-                    <label style="margin-top:0.3rem;">Tags (optional, click to toggle)</label>
+                    <label style="margin-top:0.3rem;">Tags (click to toggle - you can select multiple)</label>
                     <div class="tag-selector">
-                        <span class="tag tag-new" data-tag="NEW" id="tagNew">NEW</span>
+                        <span class="tag tag-news" data-tag="NEWS" id="tagNews">NEWS</span>
+                        <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate">UPDATE</span>
+                        <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature">FEATURE</span>
                         <span class="tag tag-fix" data-tag="FIX" id="tagFix">FIX</span>
                         <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove">IMPROVE</span>
+                        <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement">ANNOUNCEMENT</span>
+                        <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant">IMPORTANT</span>
+                        <span class="tag tag-tip" data-tag="TIP" id="tagTip">TIP</span>
+                        <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity">SECURITY</span>
+                        <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance">PERFORMANCE</span>
+                        <span class="tag tag-event" data-tag="EVENT" id="tagEvent">EVENT</span>
                         <span class="tag-label">selected: <span id="selectedTagsDisplay">none</span></span>
                     </div>
 
                     <div class="admin-actions">
-                        <button class="btn btn-primary" id="addUpdateBtn">+ Add update</button>
-                        <button class="btn btn-danger" id="clearAllBtn">× Delete all</button>
+                        <button class="btn btn-primary" id="addUpdateBtn">+ Add News</button>
+                        <button class="btn btn-danger" id="clearAllBtn">× Delete All</button>
                         <button class="btn btn-outline" id="lockBtn">🔒 Lock</button>
                         <span class="status-msg" id="statusMsg">Ready</span>
                     </div>
@@ -676,9 +719,17 @@
             const statusMsg = document.getElementById('statusMsg');
             const selectedTagsDisplay = document.getElementById('selectedTagsDisplay');
             const tagElements = {
-                NEW: document.getElementById('tagNew'),
+                NEWS: document.getElementById('tagNews'),
+                UPDATE: document.getElementById('tagUpdate'),
+                FEATURE: document.getElementById('tagFeature'),
                 FIX: document.getElementById('tagFix'),
-                IMPROVE: document.getElementById('tagImprove')
+                IMPROVE: document.getElementById('tagImprove'),
+                ANNOUNCEMENT: document.getElementById('tagAnnouncement'),
+                IMPORTANT: document.getElementById('tagImportant'),
+                TIP: document.getElementById('tagTip'),
+                SECURITY: document.getElementById('tagSecurity'),
+                PERFORMANCE: document.getElementById('tagPerformance'),
+                EVENT: document.getElementById('tagEvent')
             };
             const navStatus = document.getElementById('navStatus');
 
@@ -749,7 +800,7 @@
                 if (!timeline) return;
                 const visibleUpdates = updates.filter(u => !u._hidden);
                 if (!visibleUpdates || visibleUpdates.length === 0) {
-                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-left-color:#484f58;">No updates yet. Add one via the admin panel.</div>`;
+                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-left-color:#484f58;">No news yet. Add one via the admin panel.</div>`;
                     return;
                 }
                 const sorted = [...visibleUpdates].sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -763,12 +814,15 @@
                     if (descItems.length) {
                         descHtml = '<ul>' + descItems.map(item => `<li>${escapeHtml(item)}</li>`).join('') + '</ul>';
                     }
-                    const tagHtml = tags.map(t => `<span class="tag tag-${t.toLowerCase()}">${t}</span>`).join(' ');
+                    const tagHtml = tags.map(t => {
+                        const tagClass = t.toLowerCase();
+                        return `<span class="tag tag-${tagClass}">${t}</span>`;
+                    }).join(' ');
                     html += `
                         <div class="update-item">
                             <div class="update-meta">
-                                <span class="update-version">${escapeHtml(version)} <small>update</small></span>
-                                <span class="update-date">${escapeHtml(date)}</span>
+                                <span class="update-version">${escapeHtml(version)} <small>${date}</small></span>
+                                <span class="update-date">📅 ${escapeHtml(date)}</span>
                                 ${tagHtml}
                             </div>
                             <div class="update-description">${descHtml}</div>
@@ -793,18 +847,18 @@
             // LOAD UPDATES
             // ================================================================
             async function loadUpdates() {
-                setStatus('Loading updates...', '#8b949e');
+                setStatus('Loading news...', '#8b949e');
                 try {
                     updates = await fetchFromGist();
                     renderUpdates();
-                    setStatus('Updates loaded successfully', '#3fb950');
+                    setStatus('News loaded successfully', '#3fb950');
                     navStatus.textContent = '● Online';
                     navStatus.className = 'navbar-status online';
                 } catch (error) {
                     setStatus(`Error: ${error.message}`, '#da3633');
                     timeline.innerHTML =
                         `<div class="update-item" style="text-align:center; color:#da3633; border-left-color:#da3633;">
-                            Could not load updates: ${escapeHtml(error.message)}
+                            Could not load news: ${escapeHtml(error.message)}
                             <br><span style="color:#8b949e; font-size:0.85rem;">Make sure your Gist ID and Token are correct.</span>
                         </div>`;
                     navStatus.textContent = '● Offline';
@@ -820,9 +874,9 @@
                 const date = dateInput.value;
                 const descRaw = descInput.value;
 
-                if (!version) { setStatus('Version is required', '#d29922'); return; }
+                if (!version) { setStatus('Title is required', '#d29922'); return; }
                 if (!date) { setStatus('Please select a date', '#d29922'); return; }
-                if (!descRaw.trim()) { setStatus('Description cannot be empty', '#d29922'); return; }
+                if (!descRaw.trim()) { setStatus('Content cannot be empty', '#d29922'); return; }
 
                 const lines = descRaw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
                 const descItems = lines.map(l => {
@@ -850,7 +904,7 @@
                     descInput.value = '';
                     selectedTags = [];
                     updateTagDisplay();
-                    setStatus('Update saved to GitHub Gist!', '#3fb950');
+                    setStatus('News saved to GitHub Gist!', '#3fb950');
                 } catch (error) {
                     setStatus(`Error: ${error.message}`, '#da3633');
                     console.error(error);
@@ -860,8 +914,8 @@
             }
 
             async function clearAllUpdates() {
-                if (!confirm('Delete ALL updates? This cannot be undone.')) return;
-                setStatus('Deleting updates...', '#8b949e');
+                if (!confirm('Delete ALL news? This cannot be undone.')) return;
+                setStatus('Deleting news...', '#8b949e');
                 try {
                     const placeholder = [{
                         _hidden: true,
@@ -873,7 +927,7 @@
                     await saveToGist(placeholder);
                     updates = placeholder;
                     renderUpdates();
-                    setStatus('All updates deleted.', '#da3633');
+                    setStatus('All news deleted.', '#da3633');
                 } catch (error) {
                     setStatus(`Error: ${error.message}`, '#da3633');
                 }
@@ -949,7 +1003,6 @@
             // ================================================================
             function openAdmin() {
                 adminOverlay.classList.add('active');
-                // If already unlocked, show form, else show unlock
                 if (isUnlocked) {
                     unlockArea.style.display = 'none';
                     adminForm.style.display = 'block';
@@ -957,7 +1010,6 @@
                     unlockArea.style.display = 'flex';
                     adminForm.style.display = 'none';
                 }
-                // Refresh updates when opening
                 loadUpdates();
             }
 
@@ -979,14 +1031,10 @@
             // INIT
             // ================================================================
             function init() {
-                // Set default date
                 const today = new Date().toISOString().slice(0, 10);
                 if (dateInput) dateInput.value = today;
 
-                // Navbar admin button
                 navAdminBtn.addEventListener('click', openAdmin);
-                
-                // Close admin overlay
                 closeAdminBtn.addEventListener('click', closeAdmin);
                 adminOverlay.addEventListener('click', function(e) {
                     if (e.target === this) closeAdmin();
@@ -995,27 +1043,25 @@
                     if (e.key === 'Escape') closeAdmin();
                 });
 
-                // Admin buttons
                 unlockBtn.addEventListener('click', unlockAdmin);
                 lockBtn.addEventListener('click', lockAdmin);
                 addBtn.addEventListener('click', addUpdate);
                 clearBtn.addEventListener('click', clearAllUpdates);
 
-                // Enter key on password
                 passwordInput.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') unlockAdmin();
                 });
 
-                // Tag toggles
-                if (tagElements.NEW) tagElements.NEW.addEventListener('click', () => toggleTag('NEW'));
-                if (tagElements.FIX) tagElements.FIX.addEventListener('click', () => toggleTag('FIX'));
-                if (tagElements.IMPROVE) tagElements.IMPROVE.addEventListener('click', () => toggleTag('IMPROVE'));
+                // Tag toggles for all new tags
+                Object.keys(tagElements).forEach(key => {
+                    const el = tagElements[key];
+                    if (el) {
+                        el.addEventListener('click', () => toggleTag(key));
+                    }
+                });
 
-                // Initial state
                 updateTagDisplay();
                 setStatus('Admin locked', '#8b949e');
-
-                // Load updates
                 loadUpdates();
             }
 
