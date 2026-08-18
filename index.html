@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verified GIF Studio - Update Log</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        .app {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .log-container {
+            background: #161b22;
+            border-radius: 24px;
+            padding: 2rem 2rem 2.2rem;
+            border: 1px solid #30363d;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1.8rem;
+        }
+        .log-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem 1rem;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+        .log-header h1 {
+            font-weight: 600;
+            font-size: 1.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .log-header h1 span {
+            background: #238636;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            color: white;
+        }
+        .repo-badge {
+            background: #21262d;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid #30363d;
+            color: #8b949e;
+        }
+
+        .update-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .update-item {
+            background: #0d1117;
+            border-radius: 18px;
+            padding: 1.2rem 1.5rem;
+            border-left: 4px solid #238636;
+            border: 1px solid #30363d;
+            transition: background 0.15s;
+        }
+        .update-item:hover {
+            background: #12171e;
+            border-color: #3d444d;
+        }
+        .update-meta {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .update-version {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #f0f6fc;
+        }
+        .update-version small {
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: #8b949e;
+            margin-left: 6px;
+        }
+        .update-date {
+            font-size: 0.8rem;
+            background: #21262d;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #b1bac4;
+            border: 1px solid #30363d;
+        }
+        .update-description ul {
+            margin: 0.5rem 0 0 1.2rem;
+            list-style: disc;
+            color: #b1bac4;
+        }
+        .update-description li {
+            margin-bottom: 0.2rem;
+        }
+        .update-description li::marker {
+            color: #238636;
+        }
+        .tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+        .tag-new {
+            background: #1f6feb;
+            color: white;
+        }
+        .tag-fix {
+            background: #da3633;
+            color: white;
+        }
+        .tag-improve {
+            background: #d29922;
+            color: #0d1117;
+        }
+
+        .admin-panel {
+            background: #161b22;
+            border-radius: 24px;
+            padding: 1.8rem 2rem 2.2rem;
+            border: 1px solid #30363d;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .admin-panel.visible {
+            display: block;
+        }
+        .admin-panel h2 {
+            font-weight: 500;
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: #f0f6fc;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.5rem;
+        }
+        .admin-panel label {
+            display: block;
+            margin: 0.8rem 0 0.3rem;
+            font-weight: 500;
+            color: #b1bac4;
+        }
+        .admin-panel input,
+        .admin-panel textarea {
+            width: 100%;
+            padding: 0.6rem 0.9rem;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            color: #f0f6fc;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border 0.2s;
+        }
+        .admin-panel input:focus,
+        .admin-panel textarea:focus {
+            border-color: #58a6ff;
+            outline: none;
+        }
+        .admin-panel textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .admin-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            align-items: center;
+        }
+        .admin-row .field-group {
+            flex: 1 1 200px;
+        }
+        .btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary {
+            background: #238636;
+            border-color: #2ea043;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #2ea043;
+            border-color: #3fb950;
+        }
+        .btn-danger {
+            background: #da3633;
+            border-color: #f85149;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #f85149;
+        }
+        .btn-outline {
+            background: transparent;
+            border-color: #30363d;
+        }
+        .btn-outline:hover {
+            background: #21262d;
+        }
+        .admin-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            align-items: center;
+        }
+        .lock-btn {
+            margin-left: auto;
+        }
+        .status-msg {
+            margin-top: 0.8rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            background: #1c2333;
+            color: #8b949e;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        .unlock-area {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .unlock-area input {
+            flex: 1 1 200px;
+        }
+
+        .setup-guide {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1rem 0 1.5rem 0;
+        }
+        .setup-guide h3 {
+            color: #f0f6fc;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .setup-guide ol {
+            margin-left: 1.5rem;
+            color: #b1bac4;
+            line-height: 1.8;
+        }
+        .setup-guide code {
+            background: #1c2333;
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #58a6ff;
+        }
+        .setup-guide .highlight {
+            background: #1f6feb22;
+            border-left: 3px solid #1f6feb;
+            padding: 0.3rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .setup-guide .warning {
+            background: #da363322;
+            border-left: 3px solid #da3633;
+            padding: 0.3rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0 6px 6px 0;
+            color: #f0887a;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #484f58;
+            border-top: 1px solid #21262d;
+            padding-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1.2rem;
+        }
+        .footer-note a {
+            color: #58a6ff;
+            text-decoration: none;
+            border-bottom: 1px dotted #2d405b;
+        }
+        .footer-note a:hover {
+            color: #79c0ff;
+            border-bottom: 1px solid #58a6ff;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #8b949e;
+        }
+
+        @media (max-width: 550px) {
+            .log-container,
+            .admin-panel {
+                padding: 1.2rem;
+            }
+            .update-item {
+                padding: 1rem;
+            }
+            .log-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .admin-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+
+        <div class="log-container">
+            <div class="log-header">
+                <h1>Update Log <span>Verified GIF Studio</span></h1>
+                <div class="repo-badge">GitHub Gist</div>
+            </div>
+            <div class="update-timeline" id="logTimeline">
+                <div class="loading">Loading updates...</div>
+            </div>
+        </div>
+
+        <div class="admin-panel" id="adminPanel">
+            <h2>Admin Panel - Manage Updates</h2>
+
+            <div class="unlock-area" id="unlockArea">
+                <input type="password" id="passwordInput" placeholder="Enter admin password" />
+                <button class="btn btn-primary" id="unlockBtn">Unlock</button>
+                <span style="color:#8b949e;font-size:0.85rem;">(default: admin123)</span>
+            </div>
+
+            <div id="adminContent" style="display: none; margin-top: 1.2rem;">
+
+                <div class="setup-guide">
+                    <h3>How to set up GitHub Gist</h3>
+                    <ol>
+                        <li>Generate a GitHub Personal Access Token (PAT):
+                            <br>Go to <a href="https://github.com/settings/tokens" target="_blank" style="color:#58a6ff;">github.com/settings/tokens</a>
+                            <br>Click <strong>"Generate new token (classic)"</strong>
+                            <br>Check <strong>"gist"</strong> permission only
+                            <br>Click <strong>"Generate token"</strong> and <strong>copy it immediately</strong>
+                        </li>
+                        <li>Create a new Gist:
+                            <br>Go to <a href="https://gist.github.com" target="_blank" style="color:#58a6ff;">gist.github.com</a>
+                            <br>Name the file: <code>updates.json</code>
+                            <br>Paste this content:
+                            <br><code>[{"version":"v1.0.0","date":"2026-01-01","desc":["First update!"],"tags":["NEW"]}]</code>
+                            <br>Make it <strong>Public</strong> (so everyone can read it)
+                            <br>Click <strong>"Create public gist"</strong>
+                        </li>
+                        <li>Copy the <strong>Gist ID</strong> from the URL:
+                            <br><code>https://gist.github.com/yourusername/<strong>YOUR_GIST_ID</strong></code>
+                        </li>
+                        <li>Paste both below and click <strong>"Save Settings"</strong>.</li>
+                    </ol>
+                    <div class="warning">
+                        <strong>Important:</strong> The GitHub Personal Access Token is like a password. 
+                        Keep it secure and only use it for this purpose. Never share it publicly.
+                    </div>
+                    <div class="highlight">
+                        Everyone can READ the gist (it's public), but only you can WRITE to it (using the token).
+                    </div>
+                </div>
+
+                <label for="gistIdInput">Gist ID</label>
+                <input type="text" id="gistIdInput" placeholder="e.g. abc123def456" />
+
+                <label for="tokenInput" style="margin-top:0.8rem;">GitHub Personal Access Token</label>
+                <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+
+                <div style="display:flex; gap:0.8rem; margin:0.8rem 0;">
+                    <button class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
+                    <button class="btn btn-outline" id="testConnectionBtn">Test Connection</button>
+                </div>
+                <div id="settingsStatus" style="color:#8b949e; font-size:0.9rem; margin-bottom:0.5rem;"></div>
+
+                <hr style="border-color:#30363d; margin:1.2rem 0;" />
+
+                <div class="admin-row">
+                    <div class="field-group">
+                        <label for="versionInput">Version</label>
+                        <input type="text" id="versionInput" placeholder="e.g. v2.4.0" />
+                    </div>
+                    <div class="field-group">
+                        <label for="dateInput">Date (YYYY-MM-DD)</label>
+                        <input type="date" id="dateInput" />
+                    </div>
+                </div>
+
+                <label for="descInput">Description (one item per line, use '-' for bullets)</label>
+                <textarea id="descInput" placeholder="- New feature: export to SVG&#10;- Fixed loading issue"></textarea>
+
+                <label style="margin-top:0.3rem;">Tags (optional, click to toggle)</label>
+                <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin:0.4rem 0 0.2rem;">
+                    <span class="tag tag-new" data-tag="NEW" style="cursor:pointer; background:#1f6feb; opacity:0.6;" id="tagNew">NEW</span>
+                    <span class="tag tag-fix" data-tag="FIX" style="cursor:pointer; background:#da3633; opacity:0.6;" id="tagFix">FIX</span>
+                    <span class="tag tag-improve" data-tag="IMPROVE" style="cursor:pointer; background:#d29922; color:#0d1117; opacity:0.6;" id="tagImprove">IMPROVE</span>
+                    <span style="color:#8b949e; font-size:0.8rem; margin-left:0.2rem;">(selected: <span id="selectedTagsDisplay">none</span>)</span>
+                </div>
+
+                <div class="admin-actions">
+                    <button class="btn btn-primary" id="addUpdateBtn">Add update</button>
+                    <button class="btn btn-danger" id="clearAllBtn">Delete all</button>
+                    <button class="btn btn-outline lock-btn" id="lockBtn">Lock</button>
+                    <span class="status-msg" id="statusMsg">Ready</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <span>Verified GIF Studio - Update Log</span>
+            <span>·</span>
+            <a href="https://gist.github.com" target="_blank">GitHub Gist</a>
+            <a href="https://verifiedgifstudio.github.io" target="_blank">Visit Website</a>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ---------- CONFIG ----------
+            const STORAGE_KEY_GIST_ID = 'github_gist_id';
+            const STORAGE_KEY_GIST_TOKEN = 'github_gist_token';
+            const DEFAULT_PASSWORD_HASH = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9'; // admin123
+
+            // ---------- STATE ----------
+            let updates = [];
+            let selectedTags = [];
+            let gistId = localStorage.getItem(STORAGE_KEY_GIST_ID) || '';
+            let token = localStorage.getItem(STORAGE_KEY_GIST_TOKEN) || '';
+
+            // DOM refs
+            const timeline = document.getElementById('logTimeline');
+            const adminPanel = document.getElementById('adminPanel');
+            const unlockArea = document.getElementById('unlockArea');
+            const adminContent = document.getElementById('adminContent');
+            const passwordInput = document.getElementById('passwordInput');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const lockBtn = document.getElementById('lockBtn');
+            const gistIdInput = document.getElementById('gistIdInput');
+            const tokenInput = document.getElementById('tokenInput');
+            const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+            const testConnectionBtn = document.getElementById('testConnectionBtn');
+            const settingsStatus = document.getElementById('settingsStatus');
+            const versionInput = document.getElementById('versionInput');
+            const dateInput = document.getElementById('dateInput');
+            const descInput = document.getElementById('descInput');
+            const addBtn = document.getElementById('addUpdateBtn');
+            const clearBtn = document.getElementById('clearAllBtn');
+            const statusMsg = document.getElementById('statusMsg');
+            const selectedTagsDisplay = document.getElementById('selectedTagsDisplay');
+            const tagElements = {
+                NEW: document.getElementById('tagNew'),
+                FIX: document.getElementById('tagFix'),
+                IMPROVE: document.getElementById('tagImprove')
+            };
+
+            // ---------- HASH FUNCTION ----------
+            async function hashPassword(password) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(password);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            // ---------- GITHUB GIST API HELPERS ----------
+            async function fetchFromGist() {
+                if (!gistId) {
+                    throw new Error('Gist ID not configured.');
+                }
+
+                const url = `https://api.github.com/gists/${gistId}`;
+
+                const response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`GitHub API error (${response.status}): ${errorText}`);
+                }
+
+                const data = await response.json();
+                const file = data.files['updates.json'];
+                
+                if (!file) {
+                    throw new Error('File "updates.json" not found in gist.');
+                }
+
+                const content = JSON.parse(file.content);
+                if (!Array.isArray(content)) {
+                    throw new Error('Invalid data format. Expected an array.');
+                }
+                return content;
+            }
+
+            async function saveToGist(updatesArray) {
+                if (!gistId) {
+                    throw new Error('Gist ID not configured.');
+                }
+                if (!token) {
+                    throw new Error('GitHub token not configured.');
+                }
+
+                const url = `https://api.github.com/gists/${gistId}`;
+
+                const payload = {
+                    files: {
+                        'updates.json': {
+                            content: JSON.stringify(updatesArray, null, 2)
+                        }
+                    }
+                };
+
+                const response = await fetch(url, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`GitHub API error (${response.status}): ${errorText}`);
+                }
+
+                return await response.json();
+            }
+
+            // ---------- RENDER ----------
+            function renderUpdates() {
+                if (!timeline) return;
+                
+                // Filter out the hidden placeholder
+                const visibleUpdates = updates.filter(u => !u._hidden);
+                
+                if (!visibleUpdates || visibleUpdates.length === 0) {
+                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-left-color:#484f58;">No updates yet. Add one via the admin panel.</div>`;
+                    return;
+                }
+                
+                const sorted = [...visibleUpdates].sort((a, b) => (a.date < b.date ? 1 : -1));
+                let html = '';
+                sorted.forEach(u => {
+                    const version = u.version || 'v?';
+                    const date = u.date || 'YYYY-MM-DD';
+                    const descItems = Array.isArray(u.desc) ? u.desc : [];
+                    const tags = Array.isArray(u.tags) ? u.tags : [];
+                    let descHtml = '';
+                    if (descItems.length) {
+                        descHtml = '<ul>' + descItems.map(item => `<li>${escapeHtml(item)}</li>`).join('') + '</ul>';
+                    }
+                    const tagHtml = tags.map(t => `<span class="tag tag-${t.toLowerCase()}">${t}</span>`).join(' ');
+                    html += `
+                        <div class="update-item">
+                            <div class="update-meta">
+                                <span class="update-version">${escapeHtml(version)} <small>update</small></span>
+                                <span class="update-date">${escapeHtml(date)}</span>
+                                ${tagHtml}
+                            </div>
+                            <div class="update-description">${descHtml}</div>
+                        </div>
+                    `;
+                });
+                timeline.innerHTML = html;
+            }
+
+            function escapeHtml(text) {
+                if (!text) return '';
+                return String(text).replace(/[&<>"]/g, function(m) {
+                    if (m === '&') return '&amp;';
+                    if (m === '<') return '&lt;';
+                    if (m === '>') return '&gt;';
+                    if (m === '"') return '&quot;';
+                    return m;
+                });
+            }
+
+            // ---------- LOAD UPDATES ----------
+            async function loadUpdates() {
+                setStatus('Loading updates...', '#8b949e');
+                try {
+                    updates = await fetchFromGist();
+                    renderUpdates();
+                    setStatus('Updates loaded successfully', '#3fb950');
+                } catch (error) {
+                    setStatus(`Error: ${error.message}`, '#da3633');
+                    timeline.innerHTML =
+                        `<div class="update-item" style="text-align:center; color:#da3633; border-left-color:#da3633;">
+                            Could not load updates: ${escapeHtml(error.message)}
+                            <br><span style="color:#8b949e; font-size:0.85rem;">Make sure your Gist ID and Token are correct.</span>
+                        </div>`;
+                }
+            }
+
+            // ---------- ADMIN FUNCTIONS ----------
+            function saveSettings() {
+                const newGistId = gistIdInput.value.trim();
+                const newToken = tokenInput.value.trim();
+
+                if (!newGistId) { setSettingsStatus('Please enter a Gist ID', '#d29922'); return; }
+                if (!newToken) { setSettingsStatus('Please enter your GitHub token', '#d29922'); return; }
+
+                gistId = newGistId;
+                token = newToken;
+                localStorage.setItem(STORAGE_KEY_GIST_ID, gistId);
+                localStorage.setItem(STORAGE_KEY_GIST_TOKEN, token);
+
+                setSettingsStatus('Settings saved successfully!', '#3fb950');
+                testConnection();
+            }
+
+            async function testConnection() {
+                setSettingsStatus('Testing connection...', '#8b949e');
+                try {
+                    const testData = await fetchFromGist();
+                    setSettingsStatus(`Connection successful! Found ${testData.length} updates.`, '#3fb950');
+                    updates = testData;
+                    renderUpdates();
+                } catch (error) {
+                    setSettingsStatus(`Connection failed: ${error.message}`, '#da3633');
+                }
+            }
+
+            async function addUpdate() {
+                if (!gistId || !token) {
+                    setStatus('Please configure Gist ID and Token first', '#da3633');
+                    return;
+                }
+
+                const version = versionInput.value.trim();
+                const date = dateInput.value;
+                const descRaw = descInput.value;
+
+                if (!version) { setStatus('Version is required', '#d29922'); return; }
+                if (!date) { setStatus('Please select a date', '#d29922'); return; }
+                if (!descRaw.trim()) { setStatus('Description cannot be empty', '#d29922'); return; }
+
+                const lines = descRaw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                const descItems = lines.map(l => {
+                    if (l.startsWith('-') || l.startsWith('*')) return l.replace(/^[-*]\s*/, '').trim();
+                    return l;
+                });
+
+                const newUpdate = {
+                    version: version,
+                    date: date,
+                    desc: descItems,
+                    tags: [...selectedTags]
+                };
+
+                setStatus('Saving to GitHub Gist...', '#8b949e');
+                addBtn.disabled = true;
+
+                try {
+                    const currentUpdates = await fetchFromGist();
+                    currentUpdates.push(newUpdate);
+                    await saveToGist(currentUpdates);
+                    updates = currentUpdates;
+                    renderUpdates();
+
+                    versionInput.value = '';
+                    descInput.value = '';
+                    selectedTags = [];
+                    updateTagDisplay();
+                    setStatus('Update saved to GitHub Gist!', '#3fb950');
+                } catch (error) {
+                    setStatus(`Error: ${error.message}`, '#da3633');
+                    console.error(error);
+                } finally {
+                    addBtn.disabled = false;
+                }
+            }
+
+            async function clearAllUpdates() {
+                if (!gistId || !token) {
+                    setStatus('Please configure Gist ID and Token first', '#da3633');
+                    return;
+                }
+                if (!confirm('Delete ALL updates? This cannot be undone.')) return;
+
+                setStatus('Deleting updates...', '#8b949e');
+                try {
+                    // Keep only the hidden placeholder to prevent the gist from being empty
+                    const placeholder = [{
+                        _hidden: true,
+                        version: 'placeholder',
+                        date: '2000-01-01',
+                        desc: ['This is a hidden placeholder to keep the gist from being empty.'],
+                        tags: []
+                    }];
+                    await saveToGist(placeholder);
+                    updates = placeholder;
+                    renderUpdates();
+                    setStatus('All updates deleted.', '#da3633');
+                } catch (error) {
+                    setStatus(`Error: ${error.message}`, '#da3633');
+                }
+            }
+
+            // ---------- TAG TOGGLES ----------
+            function toggleTag(tag) {
+                const idx = selectedTags.indexOf(tag);
+                if (idx > -1) {
+                    selectedTags.splice(idx, 1);
+                } else {
+                    selectedTags.push(tag);
+                }
+                updateTagDisplay();
+                Object.keys(tagElements).forEach(key => {
+                    const el = tagElements[key];
+                    if (!el) return;
+                    if (selectedTags.includes(key)) {
+                        el.style.opacity = '1';
+                        el.style.boxShadow = '0 0 0 2px #f0f6fc';
+                    } else {
+                        el.style.opacity = '0.6';
+                        el.style.boxShadow = 'none';
+                    }
+                });
+            }
+
+            function updateTagDisplay() {
+                selectedTagsDisplay.textContent = selectedTags.length ? selectedTags.join(', ') : 'none';
+            }
+
+            // ---------- LOCK / UNLOCK ----------
+            async function unlockAdmin() {
+                const pwd = passwordInput.value.trim();
+                const hashedInput = await hashPassword(pwd);
+                
+                if (hashedInput === DEFAULT_PASSWORD_HASH) {
+                    unlockArea.style.display = 'none';
+                    adminContent.style.display = 'block';
+                    setStatus('Admin unlocked', '#3fb950');
+                    
+                    // Load saved settings
+                    gistIdInput.value = gistId;
+                    tokenInput.value = token;
+
+                    if (!dateInput.value) {
+                        const today = new Date().toISOString().slice(0, 10);
+                        dateInput.value = today;
+                    }
+
+                    // Load updates if settings exist
+                    if (gistId && token) {
+                        loadUpdates();
+                    } else {
+                        timeline.innerHTML =
+                            `<div class="update-item" style="text-align:center; color:#8b949e; border-left-color:#484f58;">
+                                GitHub Gist not configured. Set up your Gist ID and Token above.
+                                <br><span style="color:#8b949e; font-size:0.85rem;">Follow the setup guide.</span>
+                            </div>`;
+                    }
+                } else {
+                    setStatus('Wrong password', '#da3633');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            }
+
+            function lockAdmin() {
+                unlockArea.style.display = 'flex';
+                adminContent.style.display = 'none';
+                passwordInput.value = '';
+                setStatus('Locked', '#8b949e');
+                Object.values(tagElements).forEach(el => { if (el) { el.style.opacity = '0.6'; el.style.boxShadow = 'none'; } });
+                selectedTags = [];
+                updateTagDisplay();
+            }
+
+            function setStatus(msg, color = '#8b949e') {
+                if (statusMsg) {
+                    statusMsg.textContent = msg;
+                    statusMsg.style.color = color || '#8b949e';
+                }
+            }
+
+            function setSettingsStatus(msg, color = '#8b949e') {
+                if (settingsStatus) {
+                    settingsStatus.textContent = msg;
+                    settingsStatus.style.color = color || '#8b949e';
+                }
+            }
+
+            // ---------- INIT ----------
+            function init() {
+                adminPanel.classList.add('visible');
+
+                const today = new Date().toISOString().slice(0, 10);
+                if (dateInput) dateInput.value = today;
+
+                // Load saved settings
+                if (gistId) gistIdInput.value = gistId;
+                if (token) tokenInput.value = token;
+
+                if (unlockBtn) unlockBtn.addEventListener('click', unlockAdmin);
+                if (lockBtn) lockBtn.addEventListener('click', lockAdmin);
+                if (saveSettingsBtn) saveSettingsBtn.addEventListener('click', saveSettings);
+                if (testConnectionBtn) testConnectionBtn.addEventListener('click', testConnection);
+                if (addBtn) addBtn.addEventListener('click', addUpdate);
+                if (clearBtn) clearBtn.addEventListener('click', clearAllUpdates);
+
+                if (passwordInput) {
+                    passwordInput.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') unlockAdmin();
+                    });
+                }
+
+                if (tagElements.NEW) tagElements.NEW.addEventListener('click', () => toggleTag('NEW'));
+                if (tagElements.FIX) tagElements.FIX.addEventListener('click', () => toggleTag('FIX'));
+                if (tagElements.IMPROVE) tagElements.IMPROVE.addEventListener('click', () => toggleTag('IMPROVE'));
+
+                Object.values(tagElements).forEach(el => { if (el) el.style.opacity = '0.6'; });
+                updateTagDisplay();
+                setStatus('Admin locked - enter password to manage updates', '#8b949e');
+
+                // Try to load updates if settings exist
+                if (gistId && token) {
+                    loadUpdates();
+                } else {
+                    timeline.innerHTML =
+                        `<div class="update-item" style="text-align:center; color:#8b949e; border-left-color:#484f58;">
+                            GitHub Gist not configured. Unlock admin panel and set up your Gist ID and Token.
+                            <br><span style="color:#8b949e; font-size:0.85rem;">Follow the setup guide above.</span>
+                        </div>`;
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>
