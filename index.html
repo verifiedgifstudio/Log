@@ -14,14 +14,125 @@
             background: #0d1117;
             color: #c9d1d9;
             font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-            padding: 2rem 1rem;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
         }
-        .app {
-            max-width: 900px;
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(22, 27, 34, 0.95);
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: #f0f6fc;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .navbar-brand .logo {
+            background: #238636;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
+            color: white;
+        }
+        .navbar-brand span {
+            color: #8b949e;
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem 1.2rem;
+            flex-wrap: wrap;
+        }
+        .navbar-links a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .navbar-links a:hover {
+            color: #f0f6fc;
+            background: #21262d;
+        }
+        .navbar-links a.active {
+            color: #f0f6fc;
+            background: #21262d;
+        }
+        .navbar-btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .navbar-btn:hover {
+            background: #2ea043;
+            transform: scale(1.02);
+        }
+        .navbar-btn.locked {
+            background: #21262d;
+            color: #8b949e;
+        }
+        .navbar-btn.locked:hover {
+            background: #30363d;
+            color: #f0f6fc;
+        }
+        .navbar-btn.unlocked {
+            background: #da3633;
+        }
+        .navbar-btn.unlocked:hover {
+            background: #f85149;
+        }
+        .navbar-status {
+            font-size: 0.75rem;
+            color: #8b949e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            background: #21262d;
+        }
+        .navbar-status.online {
+            color: #3fb950;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            padding: 2rem 1rem;
+            max-width: 1000px;
             width: 100%;
+            margin: 0 auto;
         }
 
         .log-container {
@@ -30,7 +141,6 @@
             padding: 2rem 2rem 2.2rem;
             border: 1px solid #30363d;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-            margin-bottom: 1.8rem;
         }
         .log-header {
             display: flex;
@@ -57,7 +167,7 @@
             border-radius: 30px;
             color: white;
         }
-        .repo-badge {
+        .log-header .badge {
             background: #21262d;
             padding: 0.3rem 1rem;
             border-radius: 40px;
@@ -143,25 +253,61 @@
             color: #0d1117;
         }
 
+        /* ===== ADMIN PANEL (Popup/Modal Style) ===== */
+        .admin-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .admin-overlay.active {
+            display: flex;
+        }
         .admin-panel {
             background: #161b22;
             border-radius: 24px;
-            padding: 1.8rem 2rem 2.2rem;
+            padding: 2rem;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
             border: 1px solid #30363d;
-            margin-top: 0.5rem;
-            display: none;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+            animation: slideUp 0.3s ease;
         }
-        .admin-panel.visible {
-            display: block;
+        .admin-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 1rem;
         }
-        .admin-panel h2 {
+        .admin-panel-header h2 {
             font-weight: 500;
             font-size: 1.3rem;
-            margin-bottom: 1.2rem;
             color: #f0f6fc;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 0.5rem;
         }
+        .admin-panel-header .close-btn {
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0 0.5rem;
+            transition: color 0.2s;
+        }
+        .admin-panel-header .close-btn:hover {
+            color: #f0f6fc;
+        }
+
         .admin-panel label {
             display: block;
             margin: 0.8rem 0 0.3rem;
@@ -199,7 +345,8 @@
         .admin-row .field-group {
             flex: 1 1 200px;
         }
-        .btn {
+
+        .admin-panel .btn {
             background: #21262d;
             border: 1px solid #30363d;
             color: #c9d1d9;
@@ -213,28 +360,28 @@
             align-items: center;
             gap: 6px;
         }
-        .btn-primary {
+        .admin-panel .btn-primary {
             background: #238636;
             border-color: #2ea043;
             color: white;
         }
-        .btn-primary:hover {
+        .admin-panel .btn-primary:hover {
             background: #2ea043;
             border-color: #3fb950;
         }
-        .btn-danger {
+        .admin-panel .btn-danger {
             background: #da3633;
             border-color: #f85149;
             color: white;
         }
-        .btn-danger:hover {
+        .admin-panel .btn-danger:hover {
             background: #f85149;
         }
-        .btn-outline {
+        .admin-panel .btn-outline {
             background: transparent;
             border-color: #30363d;
         }
-        .btn-outline:hover {
+        .admin-panel .btn-outline:hover {
             background: #21262d;
         }
         .admin-actions {
@@ -243,9 +390,6 @@
             gap: 0.8rem;
             margin-top: 1.5rem;
             align-items: center;
-        }
-        .lock-btn {
-            margin-left: auto;
         }
         .status-msg {
             margin-top: 0.8rem;
@@ -256,15 +400,24 @@
             font-size: 0.9rem;
             display: inline-block;
         }
+
         .unlock-area {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 0.8rem;
-            margin-top: 0.5rem;
+            margin: 1rem 0;
+            padding: 1.2rem;
+            background: #0d1117;
+            border-radius: 16px;
+            border: 1px solid #30363d;
         }
         .unlock-area input {
             flex: 1 1 200px;
+        }
+        .unlock-area .hint {
+            color: #8b949e;
+            font-size: 0.85rem;
         }
 
         .hardcoded-notice {
@@ -280,118 +433,211 @@
             color: #58a6ff;
         }
 
-        .footer-note {
-            margin-top: 2rem;
+        .tag-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.4rem 0 0.2rem;
+        }
+        .tag-selector .tag {
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.2s;
+        }
+        .tag-selector .tag.active {
+            opacity: 1;
+            box-shadow: 0 0 0 2px #f0f6fc;
+        }
+        .tag-selector .tag-label {
+            color: #8b949e;
+            font-size: 0.8rem;
+            margin-left: 0.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
             text-align: center;
             font-size: 0.85rem;
             color: #484f58;
             border-top: 1px solid #21262d;
-            padding-top: 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem 1.2rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
         }
-        .footer-note a {
+        .footer a {
             color: #58a6ff;
             text-decoration: none;
             border-bottom: 1px dotted #2d405b;
         }
-        .footer-note a:hover {
+        .footer a:hover {
             color: #79c0ff;
             border-bottom: 1px solid #58a6ff;
         }
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: #8b949e;
+        .footer .separator {
+            margin: 0 0.5rem;
         }
 
-        @media (max-width: 550px) {
-            .log-container,
-            .admin-panel {
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.6rem 1rem;
+            }
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            .navbar-brand .logo {
+                width: 28px;
+                height: 28px;
+                font-size: 0.85rem;
+            }
+            .navbar-links {
+                gap: 0.3rem 0.8rem;
+            }
+            .navbar-links a {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+            .navbar-btn {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
+            }
+            .navbar-status {
+                font-size: 0.65rem;
+            }
+            .log-container {
                 padding: 1.2rem;
+            }
+            .log-header h1 {
+                font-size: 1.4rem;
             }
             .update-item {
                 padding: 1rem;
             }
-            .log-header {
-                flex-direction: column;
-                align-items: flex-start;
+            .admin-panel {
+                padding: 1.2rem;
+                width: 95%;
             }
             .admin-row {
                 flex-direction: column;
             }
         }
+        @media (max-width: 480px) {
+            .navbar-brand span {
+                display: none;
+            }
+            .navbar-links a:not(.active) {
+                display: none;
+            }
+            .navbar-links a.active {
+                font-size: 0.8rem;
+                padding: 0.2rem 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="app">
 
-        <!-- MAIN LOG DISPLAY -->
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <div class="logo">VS</div>
+            Verified GIF Studio
+            <span>· Update Log</span>
+        </a>
+        <div class="navbar-links">
+            <a href="#" class="active">Home</a>
+            <a href="https://verifiedgifstudio.github.io" target="_blank">Main Site</a>
+            <a href="https://github.com/verifiedgifstudio" target="_blank">GitHub</a>
+            <button class="navbar-btn locked" id="navAdminBtn">
+                🔒 Admin
+            </button>
+            <span class="navbar-status" id="navStatus">● Online</span>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
         <div class="log-container">
             <div class="log-header">
-                <h1>Update Log <span>Verified GIF Studio</span></h1>
-                <div class="repo-badge">GitHub Gist</div>
+                <h1>Update Log <span>Latest</span></h1>
+                <div class="badge">GitHub Gist</div>
             </div>
             <div class="update-timeline" id="logTimeline">
                 <div class="loading">Loading updates...</div>
             </div>
         </div>
+    </div>
 
-        <!-- ADMIN PANEL -->
-        <div class="admin-panel" id="adminPanel">
-            <h2>Admin Panel - Manage Updates</h2>
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        <span>Verified GIF Studio - Update Log</span>
+        <span class="separator">·</span>
+        <a href="https://gist.github.com" target="_blank">GitHub Gist</a>
+        <span class="separator">·</span>
+        <a href="https://verifiedgifstudio.github.io" target="_blank">Visit Website</a>
+    </div>
+
+    <!-- ===== ADMIN OVERLAY (Modal) ===== -->
+    <div class="admin-overlay" id="adminOverlay">
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h2>Admin Panel - Manage Updates</h2>
+                <button class="close-btn" id="closeAdminBtn">&times;</button>
+            </div>
 
             <div class="hardcoded-notice">
                 <strong>Configured</strong> - Using GitHub Gist (hardcoded credentials)
             </div>
 
-            <div class="unlock-area" id="unlockArea">
-                <input type="password" id="passwordInput" placeholder="Enter admin password" />
-                <button class="btn btn-primary" id="unlockBtn">Unlock</button>
-                <span style="color:#8b949e;font-size:0.85rem;">(default: admin123)</span>
-            </div>
+            <div id="adminContent">
+                <div class="unlock-area" id="unlockArea">
+                    <input type="password" id="passwordInput" placeholder="Enter admin password" />
+                    <button class="btn btn-primary" id="unlockBtn">Unlock</button>
+                    <span class="hint">(default: admin123)</span>
+                </div>
 
-            <div id="adminContent" style="display: none; margin-top: 1.2rem;">
-
-                <div class="admin-row">
-                    <div class="field-group">
-                        <label for="versionInput">Version</label>
-                        <input type="text" id="versionInput" placeholder="e.g. v2.4.0" />
+                <div id="adminForm" style="display: none;">
+                    <div class="admin-row">
+                        <div class="field-group">
+                            <label for="versionInput">Version</label>
+                            <input type="text" id="versionInput" placeholder="e.g. v2.4.0" />
+                        </div>
+                        <div class="field-group">
+                            <label for="dateInput">Date (YYYY-MM-DD)</label>
+                            <input type="date" id="dateInput" />
+                        </div>
                     </div>
-                    <div class="field-group">
-                        <label for="dateInput">Date (YYYY-MM-DD)</label>
-                        <input type="date" id="dateInput" />
+
+                    <label for="descInput">Description (one item per line, use '-' for bullets)</label>
+                    <textarea id="descInput" placeholder="- New feature: export to SVG&#10;- Fixed loading issue"></textarea>
+
+                    <label style="margin-top:0.3rem;">Tags (optional, click to toggle)</label>
+                    <div class="tag-selector">
+                        <span class="tag tag-new" data-tag="NEW" id="tagNew">NEW</span>
+                        <span class="tag tag-fix" data-tag="FIX" id="tagFix">FIX</span>
+                        <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove">IMPROVE</span>
+                        <span class="tag-label">selected: <span id="selectedTagsDisplay">none</span></span>
+                    </div>
+
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" id="addUpdateBtn">+ Add update</button>
+                        <button class="btn btn-danger" id="clearAllBtn">× Delete all</button>
+                        <button class="btn btn-outline" id="lockBtn">🔒 Lock</button>
+                        <span class="status-msg" id="statusMsg">Ready</span>
                     </div>
                 </div>
-
-                <label for="descInput">Description (one item per line, use '-' for bullets)</label>
-                <textarea id="descInput" placeholder="- New feature: export to SVG&#10;- Fixed loading issue"></textarea>
-
-                <label style="margin-top:0.3rem;">Tags (optional, click to toggle)</label>
-                <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin:0.4rem 0 0.2rem;">
-                    <span class="tag tag-new" data-tag="NEW" style="cursor:pointer; background:#1f6feb; opacity:0.6;" id="tagNew">NEW</span>
-                    <span class="tag tag-fix" data-tag="FIX" style="cursor:pointer; background:#da3633; opacity:0.6;" id="tagFix">FIX</span>
-                    <span class="tag tag-improve" data-tag="IMPROVE" style="cursor:pointer; background:#d29922; color:#0d1117; opacity:0.6;" id="tagImprove">IMPROVE</span>
-                    <span style="color:#8b949e; font-size:0.8rem; margin-left:0.2rem;">(selected: <span id="selectedTagsDisplay">none</span>)</span>
-                </div>
-
-                <div class="admin-actions">
-                    <button class="btn btn-primary" id="addUpdateBtn">Add update</button>
-                    <button class="btn btn-danger" id="clearAllBtn">Delete all</button>
-                    <button class="btn btn-outline lock-btn" id="lockBtn">Lock</button>
-                    <span class="status-msg" id="statusMsg">Ready</span>
-                </div>
             </div>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="footer-note">
-            <span>Verified GIF Studio - Update Log</span>
-            <span>·</span>
-            <a href="https://gist.github.com" target="_blank">GitHub Gist</a>
-            <a href="https://verifiedgifstudio.github.io" target="_blank">Visit Website</a>
         </div>
     </div>
 
@@ -401,21 +647,10 @@
             // HARDCODED CREDENTIALS - SPLIT TO BYPASS GITHUB SCANNING
             // ================================================================
             
-            // Gist ID (public, safe to show)
             const GIST_ID = 'c2541667709a9a415e05805df608ab37';
-            
-            // Token split into 2 parts to bypass GitHub's secret scanning
-            // Part 1: First half of the token
             const TOKEN_PART1 = 'ghp_8yZ1Oc1Z4aV13t6SNQOwj';
-            // Part 2: Second half of the token
             const TOKEN_PART2 = 'uTsa9jDE20UkHDo';
-            
-            // Combine the parts at runtime
             const GITHUB_TOKEN = TOKEN_PART1 + TOKEN_PART2;
-            
-            // Admin password (SHA-256 hash of 'admin123')
-            // To change password, go to https://emn178.github.io/online-tools/sha256.html
-            // and replace the hash below with your new password's hash
             const DEFAULT_PASSWORD_HASH = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
 
             // ================================================================
@@ -423,15 +658,18 @@
             // ================================================================
             let updates = [];
             let selectedTags = [];
+            let isUnlocked = false;
 
             // DOM refs
             const timeline = document.getElementById('logTimeline');
-            const adminPanel = document.getElementById('adminPanel');
+            const adminOverlay = document.getElementById('adminOverlay');
             const unlockArea = document.getElementById('unlockArea');
-            const adminContent = document.getElementById('adminContent');
+            const adminForm = document.getElementById('adminForm');
             const passwordInput = document.getElementById('passwordInput');
             const unlockBtn = document.getElementById('unlockBtn');
             const lockBtn = document.getElementById('lockBtn');
+            const closeAdminBtn = document.getElementById('closeAdminBtn');
+            const navAdminBtn = document.getElementById('navAdminBtn');
             const versionInput = document.getElementById('versionInput');
             const dateInput = document.getElementById('dateInput');
             const descInput = document.getElementById('descInput');
@@ -444,6 +682,7 @@
                 FIX: document.getElementById('tagFix'),
                 IMPROVE: document.getElementById('tagImprove')
             };
+            const navStatus = document.getElementById('navStatus');
 
             // ================================================================
             // HASH FUNCTION
@@ -459,29 +698,20 @@
             // ================================================================
             // GITHUB GIST API HELPERS
             // ================================================================
-            
-            // READ: Anyone can do this (public gist)
             async function fetchFromGist() {
                 const url = `https://api.github.com/gists/${GIST_ID}`;
-
                 const response = await fetch(url, {
-                    headers: {
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
+                    headers: { 'Accept': 'application/vnd.github.v3+json' }
                 });
-
                 if (!response.ok) {
                     const errorText = await response.text();
                     throw new Error(`GitHub API error (${response.status}): ${errorText}`);
                 }
-
                 const data = await response.json();
                 const file = data.files['updates.json'];
-                
                 if (!file) {
                     throw new Error('File "updates.json" not found in gist.');
                 }
-
                 const content = JSON.parse(file.content);
                 if (!Array.isArray(content)) {
                     throw new Error('Invalid data format. Expected an array.');
@@ -489,10 +719,8 @@
                 return content;
             }
 
-            // WRITE: Only you can do this (requires token)
             async function saveToGist(updatesArray) {
                 const url = `https://api.github.com/gists/${GIST_ID}`;
-
                 const payload = {
                     files: {
                         'updates.json': {
@@ -500,7 +728,6 @@
                         }
                     }
                 };
-
                 const response = await fetch(url, {
                     method: 'PATCH',
                     headers: {
@@ -510,12 +737,10 @@
                     },
                     body: JSON.stringify(payload)
                 });
-
                 if (!response.ok) {
                     const errorText = await response.text();
                     throw new Error(`GitHub API error (${response.status}): ${errorText}`);
                 }
-
                 return await response.json();
             }
 
@@ -524,16 +749,11 @@
             // ================================================================
             function renderUpdates() {
                 if (!timeline) return;
-                
-                // Filter out the hidden placeholder (used for delete all)
                 const visibleUpdates = updates.filter(u => !u._hidden);
-                
                 if (!visibleUpdates || visibleUpdates.length === 0) {
                     timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-left-color:#484f58;">No updates yet. Add one via the admin panel.</div>`;
                     return;
                 }
-                
-                // Sort by date (newest first)
                 const sorted = [...visibleUpdates].sort((a, b) => (a.date < b.date ? 1 : -1));
                 let html = '';
                 sorted.forEach(u => {
@@ -572,7 +792,7 @@
             }
 
             // ================================================================
-            // LOAD UPDATES FROM GITHUB
+            // LOAD UPDATES
             // ================================================================
             async function loadUpdates() {
                 setStatus('Loading updates...', '#8b949e');
@@ -580,6 +800,8 @@
                     updates = await fetchFromGist();
                     renderUpdates();
                     setStatus('Updates loaded successfully', '#3fb950');
+                    navStatus.textContent = '● Online';
+                    navStatus.className = 'navbar-status online';
                 } catch (error) {
                     setStatus(`Error: ${error.message}`, '#da3633');
                     timeline.innerHTML =
@@ -587,14 +809,14 @@
                             Could not load updates: ${escapeHtml(error.message)}
                             <br><span style="color:#8b949e; font-size:0.85rem;">Make sure your Gist ID and Token are correct.</span>
                         </div>`;
+                    navStatus.textContent = '● Offline';
+                    navStatus.className = 'navbar-status';
                 }
             }
 
             // ================================================================
             // ADMIN FUNCTIONS
             // ================================================================
-            
-            // ADD UPDATE
             async function addUpdate() {
                 const version = versionInput.value.trim();
                 const date = dateInput.value;
@@ -626,8 +848,6 @@
                     await saveToGist(currentUpdates);
                     updates = currentUpdates;
                     renderUpdates();
-
-                    // Clear form
                     versionInput.value = '';
                     descInput.value = '';
                     selectedTags = [];
@@ -641,14 +861,10 @@
                 }
             }
 
-            // DELETE ALL UPDATES
             async function clearAllUpdates() {
                 if (!confirm('Delete ALL updates? This cannot be undone.')) return;
-
                 setStatus('Deleting updates...', '#8b949e');
                 try {
-                    // Keep a hidden placeholder so the gist never becomes empty
-                    // This prevents GitHub API errors
                     const placeholder = [{
                         _hidden: true,
                         version: 'placeholder',
@@ -680,11 +896,9 @@
                     const el = tagElements[key];
                     if (!el) return;
                     if (selectedTags.includes(key)) {
-                        el.style.opacity = '1';
-                        el.style.boxShadow = '0 0 0 2px #f0f6fc';
+                        el.classList.add('active');
                     } else {
-                        el.style.opacity = '0.6';
-                        el.style.boxShadow = 'none';
+                        el.classList.remove('active');
                     }
                 });
             }
@@ -701,16 +915,16 @@
                 const hashedInput = await hashPassword(pwd);
                 
                 if (hashedInput === DEFAULT_PASSWORD_HASH) {
+                    isUnlocked = true;
                     unlockArea.style.display = 'none';
-                    adminContent.style.display = 'block';
+                    adminForm.style.display = 'block';
+                    navAdminBtn.textContent = '🔓 Admin';
+                    navAdminBtn.className = 'navbar-btn unlocked';
                     setStatus('Admin unlocked', '#3fb950');
-
                     if (!dateInput.value) {
                         const today = new Date().toISOString().slice(0, 10);
                         dateInput.value = today;
                     }
-
-                    // Load updates
                     loadUpdates();
                 } else {
                     setStatus('Wrong password', '#da3633');
@@ -720,15 +934,42 @@
             }
 
             function lockAdmin() {
+                isUnlocked = false;
                 unlockArea.style.display = 'flex';
-                adminContent.style.display = 'none';
+                adminForm.style.display = 'none';
                 passwordInput.value = '';
+                navAdminBtn.textContent = '🔒 Admin';
+                navAdminBtn.className = 'navbar-btn locked';
                 setStatus('Locked', '#8b949e');
-                Object.values(tagElements).forEach(el => { if (el) { el.style.opacity = '0.6'; el.style.boxShadow = 'none'; } });
+                Object.values(tagElements).forEach(el => { if (el) el.classList.remove('active'); });
                 selectedTags = [];
                 updateTagDisplay();
             }
 
+            // ================================================================
+            // OVERLAY CONTROLS
+            // ================================================================
+            function openAdmin() {
+                adminOverlay.classList.add('active');
+                // If already unlocked, show form, else show unlock
+                if (isUnlocked) {
+                    unlockArea.style.display = 'none';
+                    adminForm.style.display = 'block';
+                } else {
+                    unlockArea.style.display = 'flex';
+                    adminForm.style.display = 'none';
+                }
+                // Refresh updates when opening
+                loadUpdates();
+            }
+
+            function closeAdmin() {
+                adminOverlay.classList.remove('active');
+            }
+
+            // ================================================================
+            // UI HELPERS
+            // ================================================================
             function setStatus(msg, color = '#8b949e') {
                 if (statusMsg) {
                     statusMsg.textContent = msg;
@@ -740,41 +981,46 @@
             // INIT
             // ================================================================
             function init() {
-                // Show admin panel
-                adminPanel.classList.add('visible');
-
-                // Set default date to today
+                // Set default date
                 const today = new Date().toISOString().slice(0, 10);
                 if (dateInput) dateInput.value = today;
 
-                // Event listeners
-                if (unlockBtn) unlockBtn.addEventListener('click', unlockAdmin);
-                if (lockBtn) lockBtn.addEventListener('click', lockAdmin);
-                if (addBtn) addBtn.addEventListener('click', addUpdate);
-                if (clearBtn) clearBtn.addEventListener('click', clearAllUpdates);
+                // Navbar admin button
+                navAdminBtn.addEventListener('click', openAdmin);
+                
+                // Close admin overlay
+                closeAdminBtn.addEventListener('click', closeAdmin);
+                adminOverlay.addEventListener('click', function(e) {
+                    if (e.target === this) closeAdmin();
+                });
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') closeAdmin();
+                });
 
-                // Enter key on password field
-                if (passwordInput) {
-                    passwordInput.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter') unlockAdmin();
-                    });
-                }
+                // Admin buttons
+                unlockBtn.addEventListener('click', unlockAdmin);
+                lockBtn.addEventListener('click', lockAdmin);
+                addBtn.addEventListener('click', addUpdate);
+                clearBtn.addEventListener('click', clearAllUpdates);
 
-                // Tag toggle listeners
+                // Enter key on password
+                passwordInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') unlockAdmin();
+                });
+
+                // Tag toggles
                 if (tagElements.NEW) tagElements.NEW.addEventListener('click', () => toggleTag('NEW'));
                 if (tagElements.FIX) tagElements.FIX.addEventListener('click', () => toggleTag('FIX'));
                 if (tagElements.IMPROVE) tagElements.IMPROVE.addEventListener('click', () => toggleTag('IMPROVE'));
 
-                // Initial tag styles
-                Object.values(tagElements).forEach(el => { if (el) el.style.opacity = '0.6'; });
+                // Initial state
                 updateTagDisplay();
-                setStatus('Admin locked - enter password to manage updates', '#8b949e');
+                setStatus('Admin locked', '#8b949e');
 
-                // Load updates automatically on page load
+                // Load updates
                 loadUpdates();
             }
 
-            // Start the app when DOM is ready
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', init);
             } else {
