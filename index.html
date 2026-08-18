@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verified GIF Studio - News Log</title>
+    <title>Verified GIF Studio - اخبار و به‌روزرسانی‌ها</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         body {
             background: #0d1117;
             color: #c9d1d9;
-            font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+            font-family: 'Segoe UI', 'Helvetica Neue', 'Vazir', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -185,7 +185,8 @@
             background: #0d1117;
             border-radius: 18px;
             padding: 1.2rem 1.5rem;
-            border-left: 4px solid #89CFF0;
+            border-right: 4px solid #89CFF0;
+            border-left: none;
             border: 1px solid #30363d;
             transition: background 0.15s;
         }
@@ -209,7 +210,7 @@
             font-weight: 400;
             font-size: 0.8rem;
             color: #8b949e;
-            margin-left: 6px;
+            margin-right: 6px;
         }
         .update-date {
             font-size: 0.8rem;
@@ -220,7 +221,7 @@
             border: 1px solid #30363d;
         }
         .update-description ul {
-            margin: 0.5rem 0 0 1.2rem;
+            margin: 0.5rem 1.2rem 0 0;
             list-style: disc;
             color: #b1bac4;
         }
@@ -239,7 +240,7 @@
             border-radius: 30px;
             text-transform: uppercase;
             letter-spacing: 0.4px;
-            margin-left: 4px;
+            margin-right: 4px;
             vertical-align: middle;
             display: inline-block;
         }
@@ -486,7 +487,7 @@
         .tag-selector .tag-label {
             color: #8b949e;
             font-size: 0.8rem;
-            margin-left: 0.2rem;
+            margin-right: 0.2rem;
             display: flex;
             align-items: center;
         }
@@ -588,16 +589,16 @@
         <a href="#" class="navbar-brand">
             <div class="logo">VGS</div>
             Verified GIF Studio
-            <span>· News Log</span>
+            <span>· اخبار و به‌روزرسانی‌ها</span>
         </a>
         <div class="navbar-links">
-            <a href="#" class="active">Home</a>
-            <a href="https://verifiedgifstudio.github.io" target="_blank">Main Site</a>
+            <a href="#" class="active">خانه</a>
+            <a href="https://verifiedgifstudio.github.io" target="_blank">وب‌سایت اصلی</a>
             
             <button class="navbar-btn locked" id="navAdminBtn">
-                🔒 Admin
+                🔒 پنل مدیریت
             </button>
-            <span class="navbar-status" id="navStatus">● Online</span>
+            <span class="navbar-status" id="navStatus">● آنلاین</span>
         </div>
     </nav>
 
@@ -605,77 +606,77 @@
     <div class="main-content">
         <div class="log-container">
             <div class="log-header">
-                <h1>News Log <span>Latest Updates</span></h1>
-                <div class="badge">📰 News Feed</div>
+                <h1>📰 اخبار و به‌روزرسانی‌ها <span>آخرین اخبار</span></h1>
+                <div class="badge">📰 خوراک خبری</div>
             </div>
             <div class="update-timeline" id="logTimeline">
-                <div class="loading">Loading news...</div>
+                <div class="loading">در حال بارگذاری اخبار...</div>
             </div>
         </div>
     </div>
 
     <!-- ===== FOOTER ===== -->
     <div class="footer">
-        <span>Verified GIF Studio News Log - &copy; Hercule & TAXI LAC</span><br>
+        <span>Verified GIF Studio - اخبار و به‌روزرسانی‌ها &copy; هرکول و تاکسی لاک</span><br>
         
-        <a href="https://verifiedgifstudio.github.io" target="_blank">Visit Website</a>
+        <a href="https://verifiedgifstudio.github.io" target="_blank">بازدید از وب‌سایت</a>
     </div>
 
     <!-- ===== ADMIN OVERLAY (Modal) ===== -->
     <div class="admin-overlay" id="adminOverlay">
         <div class="admin-panel">
             <div class="admin-panel-header">
-                <h2>Admin Panel - Manage News</h2>
+                <h2>🔐 پنل مدیریت - مدیریت اخبار</h2>
                 <button class="close-btn" id="closeAdminBtn">&times;</button>
             </div>
 
             <div class="hardcoded-notice">
-                <strong>Configured</strong> - News stored on GitHub Gist
+                <strong>پیکربندی شده</strong> - اخبار در GitHub Gist ذخیره می‌شود
             </div>
 
             <div id="adminContent">
                 <div class="unlock-area" id="unlockArea">
-                    <input type="password" id="passwordInput" placeholder="Enter admin password" />
-                    <button class="btn btn-primary" id="unlockBtn">Unlock</button>
-                    <span class="hint">Only admin knows :)</span>
+                    <input type="password" id="passwordInput" placeholder="رمز عبور مدیر را وارد کنید" />
+                    <button class="btn btn-primary" id="unlockBtn">باز کردن</button>
+                    <span class="hint">فقط مدیر می‌داند :)</span>
                 </div>
 
                 <div id="adminForm" style="display: none;">
                     <div class="admin-row">
                         <div class="field-group">
-                            <label for="versionInput">Title / Version</label>
-                            <input type="text" id="versionInput" placeholder="e.g. v2.4.0 or 'New Feature Release'" />
+                            <label for="versionInput">عنوان / نسخه</label>
+                            <input type="text" id="versionInput" placeholder="مثلاً v2.4.0 یا 'ویژگی جدید'" />
                         </div>
                         <div class="field-group">
-                            <label for="dateInput">Date (YYYY-MM-DD)</label>
+                            <label for="dateInput">تاریخ (YYYY-MM-DD)</label>
                             <input type="date" id="dateInput" />
                         </div>
                     </div>
 
-                    <label for="descInput">News Content (one item per line, use '-' for bullets)</label>
-                    <textarea id="descInput" placeholder="- New feature: export to SVG&#10;- Fixed loading issue&#10;- Community event announced"></textarea>
+                    <label for="descInput">محتوا (هر خط یک آیتم، برای گلوله از '-' استفاده کنید)</label>
+                    <textarea id="descInput" placeholder="- ویژگی جدید: خروجی SVG&#10;- رفع مشکل بارگذاری&#10;- رویداد اجتماعی اعلام شد"></textarea>
 
-                    <label style="margin-top:0.3rem;">Tags (click to toggle - you can select multiple)</label>
+                    <label style="margin-top:0.3rem;">برچسب‌ها (برای انتخاب کلیک کنید - می‌توانید چندتایی انتخاب کنید)</label>
                     <div class="tag-selector">
-                        <span class="tag tag-news" data-tag="NEWS" id="tagNews">NEWS</span>
-                        <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate">UPDATE</span>
-                        <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature">FEATURE</span>
-                        <span class="tag tag-fix" data-tag="FIX" id="tagFix">FIX</span>
-                        <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove">IMPROVE</span>
-                        <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement">ANNOUNCEMENT</span>
-                        <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant">IMPORTANT</span>
-                        <span class="tag tag-tip" data-tag="TIP" id="tagTip">TIP</span>
-                        <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity">SECURITY</span>
-                        <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance">PERFORMANCE</span>
-                        <span class="tag tag-event" data-tag="EVENT" id="tagEvent">EVENT</span>
-                        <span class="tag-label">selected: <span id="selectedTagsDisplay">none</span></span>
+                        <span class="tag tag-news" data-tag="NEWS" id="tagNews">خبر</span>
+                        <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate">به‌روزرسانی</span>
+                        <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature">ویژگی</span>
+                        <span class="tag tag-fix" data-tag="FIX" id="tagFix">رفع مشکل</span>
+                        <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove">بهبود</span>
+                        <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement">اعلامیه</span>
+                        <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant">مهم</span>
+                        <span class="tag tag-tip" data-tag="TIP" id="tagTip">نکته</span>
+                        <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity">امنیتی</span>
+                        <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance">عملکرد</span>
+                        <span class="tag tag-event" data-tag="EVENT" id="tagEvent">رویداد</span>
+                        <span class="tag-label">انتخاب شده: <span id="selectedTagsDisplay">هیچ</span></span>
                     </div>
 
                     <div class="admin-actions">
-                        <button class="btn btn-primary" id="addUpdateBtn">+ Add News</button>
-                        <button class="btn btn-danger" id="clearAllBtn">× Delete All</button>
-                        <button class="btn btn-outline" id="lockBtn">🔒 Lock</button>
-                        <span class="status-msg" id="statusMsg">Ready</span>
+                        <button class="btn btn-primary" id="addUpdateBtn">➕ افزودن خبر</button>
+                        <button class="btn btn-danger" id="clearAllBtn">× حذف همه</button>
+                        <button class="btn btn-outline" id="lockBtn">🔒 قفل</button>
+                        <span class="status-msg" id="statusMsg">آماده</span>
                     </div>
                 </div>
             </div>
@@ -800,7 +801,7 @@
                 if (!timeline) return;
                 const visibleUpdates = updates.filter(u => !u._hidden);
                 if (!visibleUpdates || visibleUpdates.length === 0) {
-                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-left-color:#484f58;">No news yet. Add one via the admin panel.</div>`;
+                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-right-color:#484f58; border-left: none;">هیچ خبری وجود ندارد. از طریق پنل مدیریت خبر اضافه کنید.</div>`;
                     return;
                 }
                 const sorted = [...visibleUpdates].sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -816,7 +817,21 @@
                     }
                     const tagHtml = tags.map(t => {
                         const tagClass = t.toLowerCase();
-                        return `<span class="tag tag-${tagClass}">${t}</span>`;
+                        const tagLabels = {
+                            'news': 'خبر',
+                            'update': 'به‌روزرسانی',
+                            'feature': 'ویژگی',
+                            'fix': 'رفع مشکل',
+                            'improve': 'بهبود',
+                            'announcement': 'اعلامیه',
+                            'important': 'مهم',
+                            'tip': 'نکته',
+                            'security': 'امنیتی',
+                            'performance': 'عملکرد',
+                            'event': 'رویداد'
+                        };
+                        const label = tagLabels[tagClass] || t;
+                        return `<span class="tag tag-${tagClass}">${label}</span>`;
                     }).join(' ');
                     html += `
                         <div class="update-item">
@@ -847,21 +862,21 @@
             // LOAD UPDATES
             // ================================================================
             async function loadUpdates() {
-                setStatus('Loading news...', '#8b949e');
+                setStatus('در حال بارگذاری اخبار...', '#8b949e');
                 try {
                     updates = await fetchFromGist();
                     renderUpdates();
-                    setStatus('News loaded successfully', '#3fb950');
-                    navStatus.textContent = '● Online';
+                    setStatus('اخبار با موفقیت بارگذاری شد', '#3fb950');
+                    navStatus.textContent = '● آنلاین';
                     navStatus.className = 'navbar-status online';
                 } catch (error) {
-                    setStatus(`Error: ${error.message}`, '#da3633');
+                    setStatus(`خطا: ${error.message}`, '#da3633');
                     timeline.innerHTML =
-                        `<div class="update-item" style="text-align:center; color:#da3633; border-left-color:#da3633;">
-                            Could not load news: ${escapeHtml(error.message)}
-                            <br><span style="color:#8b949e; font-size:0.85rem;">Make sure your Gist ID and Token are correct.</span>
+                        `<div class="update-item" style="text-align:center; color:#da3633; border-right-color:#da3633; border-left: none;">
+                            امکان بارگذاری اخبار وجود ندارد: ${escapeHtml(error.message)}
+                            <br><span style="color:#8b949e; font-size:0.85rem;">مطمئن شوید که Gist ID و Token صحیح هستند.</span>
                         </div>`;
-                    navStatus.textContent = '● Offline';
+                    navStatus.textContent = '● آفلاین';
                     navStatus.className = 'navbar-status';
                 }
             }
@@ -874,9 +889,9 @@
                 const date = dateInput.value;
                 const descRaw = descInput.value;
 
-                if (!version) { setStatus('Title is required', '#d29922'); return; }
-                if (!date) { setStatus('Please select a date', '#d29922'); return; }
-                if (!descRaw.trim()) { setStatus('Content cannot be empty', '#d29922'); return; }
+                if (!version) { setStatus('عنوان الزامی است', '#d29922'); return; }
+                if (!date) { setStatus('لطفاً تاریخ را انتخاب کنید', '#d29922'); return; }
+                if (!descRaw.trim()) { setStatus('محتوا نمی‌تواند خالی باشد', '#d29922'); return; }
 
                 const lines = descRaw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
                 const descItems = lines.map(l => {
@@ -891,7 +906,7 @@
                     tags: [...selectedTags]
                 };
 
-                setStatus('Saving to GitHub Gist...', '#8b949e');
+                setStatus('در حال ذخیره در GitHub Gist...', '#8b949e');
                 addBtn.disabled = true;
 
                 try {
@@ -904,9 +919,9 @@
                     descInput.value = '';
                     selectedTags = [];
                     updateTagDisplay();
-                    setStatus('News saved to GitHub Gist!', '#3fb950');
+                    setStatus('خبر با موفقیت در GitHub Gist ذخیره شد!', '#3fb950');
                 } catch (error) {
-                    setStatus(`Error: ${error.message}`, '#da3633');
+                    setStatus(`خطا: ${error.message}`, '#da3633');
                     console.error(error);
                 } finally {
                     addBtn.disabled = false;
@@ -914,22 +929,22 @@
             }
 
             async function clearAllUpdates() {
-                if (!confirm('Delete ALL news? This cannot be undone.')) return;
-                setStatus('Deleting news...', '#8b949e');
+                if (!confirm('همه اخبار حذف شوند؟ این عمل قابل بازگشت نیست.')) return;
+                setStatus('در حال حذف اخبار...', '#8b949e');
                 try {
                     const placeholder = [{
                         _hidden: true,
                         version: 'placeholder',
                         date: '2000-01-01',
-                        desc: ['This is a hidden placeholder to keep the gist from being empty.'],
+                        desc: ['این یک جای‌گیر مخفی است تا Gist خالی نماند.'],
                         tags: []
                     }];
                     await saveToGist(placeholder);
                     updates = placeholder;
                     renderUpdates();
-                    setStatus('All news deleted.', '#da3633');
+                    setStatus('همه اخبار حذف شدند.', '#da3633');
                 } catch (error) {
-                    setStatus(`Error: ${error.message}`, '#da3633');
+                    setStatus(`خطا: ${error.message}`, '#da3633');
                 }
             }
 
@@ -956,7 +971,21 @@
             }
 
             function updateTagDisplay() {
-                selectedTagsDisplay.textContent = selectedTags.length ? selectedTags.join(', ') : 'none';
+                const tagLabels = {
+                    'NEWS': 'خبر',
+                    'UPDATE': 'به‌روزرسانی',
+                    'FEATURE': 'ویژگی',
+                    'FIX': 'رفع مشکل',
+                    'IMPROVE': 'بهبود',
+                    'ANNOUNCEMENT': 'اعلامیه',
+                    'IMPORTANT': 'مهم',
+                    'TIP': 'نکته',
+                    'SECURITY': 'امنیتی',
+                    'PERFORMANCE': 'عملکرد',
+                    'EVENT': 'رویداد'
+                };
+                const display = selectedTags.map(t => tagLabels[t] || t).join(', ');
+                selectedTagsDisplay.textContent = selectedTags.length ? display : 'هیچ';
             }
 
             // ================================================================
@@ -970,16 +999,16 @@
                     isUnlocked = true;
                     unlockArea.style.display = 'none';
                     adminForm.style.display = 'block';
-                    navAdminBtn.textContent = '🔓 Admin';
+                    navAdminBtn.textContent = '🔓 پنل مدیریت';
                     navAdminBtn.className = 'navbar-btn unlocked';
-                    setStatus('Admin unlocked', '#3fb950');
+                    setStatus('پنل مدیریت باز شد', '#3fb950');
                     if (!dateInput.value) {
                         const today = new Date().toISOString().slice(0, 10);
                         dateInput.value = today;
                     }
                     loadUpdates();
                 } else {
-                    setStatus('Wrong password', '#da3633');
+                    setStatus('رمز عبور اشتباه است', '#da3633');
                     passwordInput.value = '';
                     passwordInput.focus();
                 }
@@ -990,9 +1019,9 @@
                 unlockArea.style.display = 'flex';
                 adminForm.style.display = 'none';
                 passwordInput.value = '';
-                navAdminBtn.textContent = '🔒 Admin';
+                navAdminBtn.textContent = '🔒 پنل مدیریت';
                 navAdminBtn.className = 'navbar-btn locked';
-                setStatus('Locked', '#8b949e');
+                setStatus('قفل شد', '#8b949e');
                 Object.values(tagElements).forEach(el => { if (el) el.classList.remove('active'); });
                 selectedTags = [];
                 updateTagDisplay();
@@ -1052,7 +1081,6 @@
                     if (e.key === 'Enter') unlockAdmin();
                 });
 
-                // Tag toggles for all new tags
                 Object.keys(tagElements).forEach(key => {
                     const el = tagElements[key];
                     if (el) {
@@ -1061,7 +1089,7 @@
                 });
 
                 updateTagDisplay();
-                setStatus('Admin locked', '#8b949e');
+                setStatus('پنل مدیریت قفل است', '#8b949e');
                 loadUpdates();
             }
 
@@ -1074,4 +1102,4 @@
         })();
     </script>
 </body>
-</html>
+    </html>
