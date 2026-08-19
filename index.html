@@ -819,11 +819,11 @@
             <span>· اخبار و به‌روزرسانی‌ها</span>
         </a>
         <div class="navbar-links">
-            <a href="https://VerfiedGIFStudio.github.io" class="active">خانه</a>
+            <a href="https://VerfiedGIFStudio.github.io" class="active"><i class="bi bi-house-fill"></i> خانه</a>
             
-            <button class="navbar-btn add-news" id="addNewsBtn"><i class="bi bi-person-plus"></i> افزودن خبر</button>
-            <button class="navbar-btn admin-login" id="adminLoginBtn"><i class="bi bi-lock"></i> مدیر</button>
-            <span class="navbar-status" id="navStatus">● آنلاین</span>
+            <button class="navbar-btn add-news" id="addNewsBtn"><i class="bi bi-plus-circle-fill"></i> افزودن خبر</button>
+            <button class="navbar-btn admin-login" id="adminLoginBtn"><i class="bi bi-lock-fill"></i> مدیر</button>
+            <span class="navbar-status" id="navStatus"><i class="bi bi-circle-fill" style="font-size:0.5rem; color:#3fb950;"></i> آنلاین</span>
         </div>
     </nav>
 
@@ -832,10 +832,10 @@
         <div class="log-container">
             <div class="log-header">
                 <h1><i class="bi bi-newspaper"></i> اخبار و به‌روزرسانی‌ها <span>آخرین اخبار</span></h1>
-                <div class="badge">خبر آپدیت</div>
+                <div class="badge"><i class="bi bi-clock-history"></i> خبر آپدیت</div>
             </div>
             <div class="update-timeline" id="logTimeline">
-                <div class="loading">در حال بارگذاری اخبار...</div>
+                <div class="loading"><i class="bi bi-arrow-repeat spin"></i> در حال بارگذاری اخبار...</div>
             </div>
         </div>
     </div>
@@ -843,18 +843,18 @@
     <!-- ===== FOOTER ===== -->
     <div class="footer">
         <span>Verified GIF Studio - اخبار و به‌روزرسانی‌ها &copy; هرکول و تاکسی ال ای سی</span><br>
-        <a href="https://verifiedgifstudio.github.io" target="_blank">بازدید از وب‌سایت</a>
+        <a href="https://verifiedgifstudio.github.io" target="_blank"><i class="bi bi-globe2"></i> بازدید از وب‌سایت</a>
     </div>
 
     <!-- ===== LOGIN MODAL ===== -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-panel">
             <div class="login-panel-header">
-                <h2><i class="bi bi-unlock2"></i> ورود به مدیریت</h2>
-                <button class="close-btn" id="closeLoginBtn">&times;</button>
+                <h2><i class="bi bi-unlock-fill"></i> ورود به مدیریت</h2>
+                <button class="close-btn" id="closeLoginBtn"><i class="bi bi-x-lg"></i></button>
             </div>
             <input type="password" id="passwordInput" placeholder="رمز عبور مدیر را وارد کنید" />
-            <button class="btn" id="loginBtn">ورود</button>
+            <button class="btn" id="loginBtn"><i class="bi bi-box-arrow-in-left"></i> ورود</button>
             <span class="login-status" id="loginStatus"></span>
         </div>
     </div>
@@ -863,44 +863,44 @@
     <div class="add-news-overlay" id="addNewsOverlay">
         <div class="add-news-panel">
             <div class="add-news-panel-header">
-                <h2 id="formTitle"><i class="bi bi-plus-square"></i> افزودن خبر جدید</h2>
-                <button class="close-btn" id="closeAddNewsBtn">&times;</button>
+                <h2 id="formTitle"><i class="bi bi-plus-square-fill"></i> افزودن خبر جدید</h2>
+                <button class="close-btn" id="closeAddNewsBtn"><i class="bi bi-x-lg"></i></button>
             </div>
 
             <div>
                 <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
                     <div style="flex: 1 1 200px;">
-                        <label for="versionInput">عنوان / نسخه</label>
+                        <label for="versionInput"><i class="bi bi-tag-fill"></i> عنوان / نسخه</label>
                         <input type="text" id="versionInput" placeholder="مثلاً v2.4.0 یا 'ویژگی جدید'" />
                     </div>
                     <div style="flex: 1 1 200px;">
-                        <label for="dateInput">تاریخ (YYYY-MM-DD)</label>
+                        <label for="dateInput"><i class="bi bi-calendar3"></i> تاریخ (YYYY-MM-DD)</label>
                         <input type="date" id="dateInput" />
                     </div>
                 </div>
 
-                <label for="descInput">محتوا (هر خط یک آیتم، برای گلوله از '-' استفاده کنید)</label>
+                <label for="descInput"><i class="bi bi-text-paragraph"></i> محتوا (هر خط یک آیتم، برای گلوله از '-' استفاده کنید)</label>
                 <textarea id="descInput" placeholder="- ویژگی جدید: خروجی SVG&#10;- رفع مشکل بارگذاری&#10;- رویداد اجتماعی اعلام شد"></textarea>
 
-                <label style="margin-top:0.3rem;">برچسب‌ها (برای انتخاب کلیک کنید - می‌توانید چندتایی انتخاب کنید)</label>
+                <label style="margin-top:0.3rem;"><i class="bi bi-tags-fill"></i> برچسب‌ها (برای انتخاب کلیک کنید - می‌توانید چندتایی انتخاب کنید)</label>
                 <div class="tag-selector">
-                    <span class="tag tag-news" data-tag="NEWS" id="tagNews"><i class="bi bi-megaphone"></i> خبر</span>
+                    <span class="tag tag-news" data-tag="NEWS" id="tagNews"><i class="bi bi-megaphone-fill"></i> خبر</span>
                     <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate"><i class="bi bi-arrow-clockwise"></i> به‌روزرسانی</span>
                     <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature"><i class="bi bi-stars"></i> ویژگی</span>
                     <span class="tag tag-fix" data-tag="FIX" id="tagFix"><i class="bi bi-wrench"></i> رفع مشکل</span>
                     <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove"><i class="bi bi-star-fill"></i> بهبود</span>
-                    <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement"><i class="bi bi-newspaper"></i> اعلامیه</span>
-                    <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant"><i class="bi bi-exclamation-triangle"></i> مهم</span>
-                    <span class="tag tag-tip" data-tag="TIP" id="tagTip"><i class="bi bi-search"></i> نکته</span>
-                    <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity"><i class="bi bi-shield-check"></i> امنیتی</span>
-                    <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance"><i class="bi bi-reception-4"></i> عملکرد</span>
-                    <span class="tag tag-event" data-tag="EVENT" id="tagEvent"><i class="bi bi-cup-hot"></i> رویداد</span>
+                    <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement"><i class="bi bi-megaphone"></i> اعلامیه</span>
+                    <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant"><i class="bi bi-exclamation-triangle-fill"></i> مهم</span>
+                    <span class="tag tag-tip" data-tag="TIP" id="tagTip"><i class="bi bi-lightbulb-fill"></i> نکته</span>
+                    <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity"><i class="bi bi-shield-check-fill"></i> امنیتی</span>
+                    <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance"><i class="bi bi-speedometer2"></i> عملکرد</span>
+                    <span class="tag tag-event" data-tag="EVENT" id="tagEvent"><i class="bi bi-cup-hot-fill"></i> رویداد</span>
                     <span class="tag-label">انتخاب شده: <span id="selectedTagsDisplay">هیچ</span></span>
                 </div>
 
                 <div class="add-news-actions">
-                    <button class="btn btn-primary" id="addUpdateBtn"><i class="bi bi-send-plus"></i> افزودن خبر</button>
-                    <button class="btn btn-outline" id="cancelAddNewsBtn">انصراف</button>
+                    <button class="btn btn-primary" id="addUpdateBtn"><i class="bi bi-send-plus-fill"></i> افزودن خبر</button>
+                    <button class="btn btn-outline" id="cancelAddNewsBtn"><i class="bi bi-x-circle"></i> انصراف</button>
                     <span class="add-news-status" id="addNewsStatus">آماده</span>
                 </div>
             </div>
@@ -1047,7 +1047,7 @@
                 });
                 
                 if (!visibleUpdates || visibleUpdates.length === 0) {
-                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-right-color:#484f58; border-left: none;">هیچ خبری وجود ندارد. از دکمه افزودن خبر در نوار بالا خبر اضافه کنید.</div>`;
+                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-right-color:#484f58; border-left: none;"><i class="bi bi-info-circle"></i> هیچ خبری وجود ندارد. از دکمه افزودن خبر در نوار بالا خبر اضافه کنید.</div>`;
                     return;
                 }
                 
@@ -1085,13 +1085,13 @@
                         <div class="update-item" data-id="${u.id}">
                             <div class="update-meta">
                                 <span class="update-version">${escapeHtml(version)}</span>
-                                <span class="update-date">📅 ${escapeHtml(date)}</span>
+                                <span class="update-date"><i class="bi bi-calendar3"></i> ${escapeHtml(date)}</span>
                                 ${tagHtml}
                             </div>
                             <div class="update-description">${descHtml}</div>
                             <div class="news-actions ${isUnlocked ? 'show' : ''}">
-                                <button class="action-btn edit-btn" onclick="window.editNews('${u.id}')">✏️ ویرایش</button>
-                                <button class="action-btn delete-btn" onclick="window.deleteNews('${u.id}')">🗑️ حذف</button>
+                                <button class="action-btn edit-btn" onclick="window.editNews('${u.id}')"><i class="bi bi-pencil-square"></i> ویرایش</button>
+                                <button class="action-btn delete-btn" onclick="window.deleteNews('${u.id}')"><i class="bi bi-trash-fill"></i> حذف</button>
                             </div>
                         </div>
                     `;
@@ -1119,7 +1119,7 @@
                 
                 const news = updates.find(u => u.id == id);
                 if (!news) {
-                    setAddStatus('❌ خبر مورد نظر یافت نشد', '#da3633');
+                    setAddStatus('<i class="bi bi-x-circle-fill"></i> خبر مورد نظر یافت نشد', '#da3633');
                     return;
                 }
                 
@@ -1140,8 +1140,8 @@
                     }
                 });
                 
-                formTitle.textContent = '✏️ ویرایش خبر';
-                addBtn.textContent = '💾 ذخیره تغییرات';
+                formTitle.textContent = '<i class="bi bi-pencil-square"></i> ویرایش خبر';
+                addBtn.textContent = '<i class="bi bi-save-fill"></i> ذخیره تغییرات';
                 setAddStatus('در حال ویرایش خبر...', '#3fb950');
                 addNewsOverlay.classList.add('active');
             };
@@ -1151,7 +1151,7 @@
                 
                 const news = updates.find(u => u.id == id);
                 if (!news) {
-                    setAddStatus('❌ خبر مورد نظر یافت نشد', '#da3633');
+                    setAddStatus('<i class="bi bi-x-circle-fill"></i> خبر مورد نظر یافت نشد', '#da3633');
                     return;
                 }
                 
@@ -1173,10 +1173,10 @@
                     }
                     await saveToGist(updates);
                     renderUpdates();
-                    setAddStatus('✅ خبر با موفقیت حذف شد', '#3fb950');
+                    setAddStatus('<i class="bi bi-check-circle-fill"></i> خبر با موفقیت حذف شد', '#3fb950');
                     setTimeout(() => setAddStatus('آماده', '#8b949e'), 2000);
                 } catch (error) {
-                    setAddStatus(`❌ خطا: ${error.message}`, '#da3633');
+                    setAddStatus(`<i class="bi bi-x-circle-fill"></i> خطا: ${error.message}`, '#da3633');
                     console.error(error);
                 }
             };
@@ -1188,15 +1188,15 @@
                 try {
                     updates = await fetchFromGist();
                     renderUpdates();
-                    navStatus.textContent = '● آنلاین';
+                    navStatus.innerHTML = '<i class="bi bi-circle-fill" style="font-size:0.5rem; color:#3fb950;"></i> آنلاین';
                     navStatus.className = 'navbar-status online';
                 } catch (error) {
                     timeline.innerHTML =
                         `<div class="update-item" style="text-align:center; color:#da3633; border-right-color:#da3633; border-left: none;">
-                            امکان بارگذاری اخبار وجود ندارد: ${escapeHtml(error.message)}
+                            <i class="bi bi-exclamation-triangle-fill"></i> امکان بارگذاری اخبار وجود ندارد: ${escapeHtml(error.message)}
                             <br><span style="color:#8b949e; font-size:0.85rem;">صفحه را باز بارگذاری کنید.</span>
                         </div>`;
-                    navStatus.textContent = '● آفلاین';
+                    navStatus.innerHTML = '<i class="bi bi-circle-fill" style="font-size:0.5rem; color:#da3633;"></i> آفلاین';
                     navStatus.className = 'navbar-status';
                 }
             }
@@ -1209,9 +1209,9 @@
                 const date = dateInput.value;
                 const descRaw = descInput.value;
 
-                if (!version) { setAddStatus('❌ عنوان الزامی است', '#da3633'); return; }
-                if (!date) { setAddStatus('❌ لطفاً تاریخ را انتخاب کنید', '#da3633'); return; }
-                if (!descRaw.trim()) { setAddStatus('❌ محتوا نمی‌تواند خالی باشد', '#da3633'); return; }
+                if (!version) { setAddStatus('<i class="bi bi-x-circle-fill"></i> عنوان الزامی است', '#da3633'); return; }
+                if (!date) { setAddStatus('<i class="bi bi-x-circle-fill"></i> لطفاً تاریخ را انتخاب کنید', '#da3633'); return; }
+                if (!descRaw.trim()) { setAddStatus('<i class="bi bi-x-circle-fill"></i> محتوا نمی‌تواند خالی باشد', '#da3633'); return; }
 
                 const lines = descRaw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
                 const descItems = lines.map(l => {
@@ -1227,7 +1227,7 @@
                     tags: [...selectedTags]
                 };
 
-                setAddStatus('⏳ در حال ذخیره...', '#8b949e');
+                setAddStatus('<i class="bi bi-arrow-repeat spin"></i> در حال ذخیره...', '#8b949e');
                 addBtn.disabled = true;
 
                 try {
@@ -1247,10 +1247,10 @@
                         } else {
                             currentUpdates.push(newUpdate);
                         }
-                        setAddStatus('✅ خبر با موفقیت ویرایش شد!', '#3fb950');
+                        setAddStatus('<i class="bi bi-check-circle-fill"></i> خبر با موفقیت ویرایش شد!', '#3fb950');
                     } else {
                         currentUpdates.push(newUpdate);
-                        setAddStatus('✅ خبر با موفقیت اضافه شد!', '#3fb950');
+                        setAddStatus('<i class="bi bi-check-circle-fill"></i> خبر با موفقیت اضافه شد!', '#3fb950');
                     }
                     
                     await saveToGist(currentUpdates);
@@ -1262,7 +1262,7 @@
                         closeAddNews();
                     }, 1500);
                 } catch (error) {
-                    setAddStatus(`❌ خطا: ${error.message}`, '#da3633');
+                    setAddStatus(`<i class="bi bi-x-circle-fill"></i> خطا: ${error.message}`, '#da3633');
                     console.error(error);
                 } finally {
                     addBtn.disabled = false;
@@ -1274,8 +1274,8 @@
                 descInput.value = '';
                 selectedTags = [];
                 editingId = null;
-                formTitle.textContent = '➕ افزودن خبر جدید';
-                addBtn.textContent = '➕ افزودن خبر';
+                formTitle.textContent = '<i class="bi bi-plus-square-fill"></i> افزودن خبر جدید';
+                addBtn.textContent = '<i class="bi bi-send-plus-fill"></i> افزودن خبر';
                 updateTagDisplay();
                 Object.keys(tagElements).forEach(key => {
                     const el = tagElements[key];
@@ -1334,10 +1334,10 @@
                 
                 if (hashedInput === DEFAULT_PASSWORD_HASH) {
                     isUnlocked = true;
-                    adminLoginBtn.textContent = '🔓 مدیر';
+                    adminLoginBtn.innerHTML = '<i class="bi bi-unlock-fill"></i> مدیر';
                     adminLoginBtn.className = 'navbar-btn admin-login logged-in';
                     addNewsBtn.style.display = 'flex';
-                    loginStatus.textContent = '✅ وارد شدید!';
+                    loginStatus.textContent = '<i class="bi bi-check-circle-fill"></i> وارد شدید!';
                     loginStatus.className = 'login-status success';
                     if (!dateInput.value) {
                         const today = new Date().toISOString().slice(0, 10);
@@ -1349,7 +1349,7 @@
                         closeLogin();
                     }, 800);
                 } else {
-                    loginStatus.textContent = '❌ رمز عبور اشتباه است';
+                    loginStatus.textContent = '<i class="bi bi-x-circle-fill"></i> رمز عبور اشتباه است';
                     loginStatus.className = 'login-status error';
                     passwordInput.value = '';
                     passwordInput.focus();
@@ -1359,7 +1359,7 @@
             function logout() {
                 if (!confirm('آیا از مدیریت خارج می‌شوید؟')) return;
                 isUnlocked = false;
-                adminLoginBtn.textContent = '🔒 مدیر';
+                adminLoginBtn.innerHTML = '<i class="bi bi-lock-fill"></i> مدیر';
                 adminLoginBtn.className = 'navbar-btn admin-login';
                 addNewsBtn.style.display = 'none';
                 Object.values(tagElements).forEach(el => { if (el) el.classList.remove('active'); });
@@ -1385,7 +1385,7 @@
 
             function openAddNews() {
                 if (!isUnlocked) {
-                    setAddStatus('❌ ابتدا وارد شوید!', '#da3633');
+                    setAddStatus('<i class="bi bi-x-circle-fill"></i> ابتدا وارد شوید!', '#da3633');
                     setTimeout(() => {
                         setAddStatus('آماده', '#8b949e');
                     }, 2000);
@@ -1408,7 +1408,7 @@
             // ================================================================
             function setAddStatus(msg, color = '#8b949e') {
                 if (addNewsStatus) {
-                    addNewsStatus.textContent = msg;
+                    addNewsStatus.innerHTML = msg;
                     addNewsStatus.style.color = color || '#8b949e';
                 }
             }
