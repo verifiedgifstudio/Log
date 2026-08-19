@@ -290,45 +290,8 @@
             color: white;
         }
 
-        /* ===== ADMIN BUTTONS ON NEWS ===== */
-        .news-actions {
-            display: none;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid #21262d;
-        }
-        .news-actions.show {
-            display: flex;
-        }
-        .news-actions .action-btn {
-            background: #21262d;
-            border: none;
-            color: #8b949e;
-            padding: 0.3rem 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .news-actions .action-btn:hover {
-            background: #30363d;
-            color: #f0f6fc;
-        }
-        .news-actions .action-btn.edit-btn:hover {
-            background: #1f6feb;
-            color: white;
-        }
-        .news-actions .action-btn.delete-btn:hover {
-            background: #da3633;
-            color: white;
-        }
-
-        /* ===== ADMIN PANEL ===== */
-        .admin-overlay {
+        /* ===== ADD NEWS FORM (Simple) ===== */
+        .add-news-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -341,14 +304,14 @@
             align-items: center;
             animation: fadeIn 0.3s ease;
         }
-        .admin-overlay.active {
+        .add-news-overlay.active {
             display: flex;
         }
-        .admin-panel {
+        .add-news-panel {
             background: #161b22;
             border-radius: 24px;
             padding: 2rem;
-            max-width: 700px;
+            max-width: 600px;
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
@@ -356,7 +319,7 @@
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
             animation: slideUp 0.3s ease;
         }
-        .admin-panel-header {
+        .add-news-panel-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -364,12 +327,12 @@
             border-bottom: 1px solid #30363d;
             padding-bottom: 1rem;
         }
-        .admin-panel-header h2 {
+        .add-news-panel-header h2 {
             font-weight: 500;
             font-size: 1.3rem;
             color: #f0f6fc;
         }
-        .admin-panel-header .close-btn {
+        .add-news-panel-header .close-btn {
             background: none;
             border: none;
             color: #8b949e;
@@ -378,18 +341,18 @@
             padding: 0 0.5rem;
             transition: color 0.2s;
         }
-        .admin-panel-header .close-btn:hover {
+        .add-news-panel-header .close-btn:hover {
             color: #f0f6fc;
         }
 
-        .admin-panel label {
+        .add-news-panel label {
             display: block;
             margin: 0.8rem 0 0.3rem;
             font-weight: 500;
             color: #b1bac4;
         }
-        .admin-panel input,
-        .admin-panel textarea {
+        .add-news-panel input,
+        .add-news-panel textarea {
             width: 100%;
             padding: 0.6rem 0.9rem;
             background: #0d1117;
@@ -400,27 +363,16 @@
             font-family: inherit;
             transition: border 0.2s;
         }
-        .admin-panel input:focus,
-        .admin-panel textarea:focus {
+        .add-news-panel input:focus,
+        .add-news-panel textarea:focus {
             border-color: #58a6ff;
             outline: none;
         }
-        .admin-panel textarea {
+        .add-news-panel textarea {
             min-height: 80px;
             resize: vertical;
         }
-        .admin-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 0.5rem;
-            align-items: center;
-        }
-        .admin-row .field-group {
-            flex: 1 1 200px;
-        }
-
-        .admin-panel .btn {
+        .add-news-panel .btn {
             background: #21262d;
             border: 1px solid #30363d;
             color: #c9d1d9;
@@ -434,38 +386,38 @@
             align-items: center;
             gap: 6px;
         }
-        .admin-panel .btn-primary {
+        .add-news-panel .btn-primary {
             background: #238636;
             border-color: #2ea043;
             color: white;
         }
-        .admin-panel .btn-primary:hover {
+        .add-news-panel .btn-primary:hover {
             background: #2ea043;
             border-color: #3fb950;
         }
-        .admin-panel .btn-danger {
+        .add-news-panel .btn-danger {
             background: #da3633;
             border-color: #f85149;
             color: white;
         }
-        .admin-panel .btn-danger:hover {
+        .add-news-panel .btn-danger:hover {
             background: #f85149;
         }
-        .admin-panel .btn-outline {
+        .add-news-panel .btn-outline {
             background: transparent;
             border-color: #30363d;
         }
-        .admin-panel .btn-outline:hover {
+        .add-news-panel .btn-outline:hover {
             background: #21262d;
         }
-        .admin-actions {
+        .add-news-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
             margin-top: 1.5rem;
             align-items: center;
         }
-        .status-msg {
+        .add-news-status {
             margin-top: 0.8rem;
             padding: 0.4rem 0.8rem;
             border-radius: 30px;
@@ -473,38 +425,6 @@
             color: #8b949e;
             font-size: 0.9rem;
             display: inline-block;
-        }
-
-        .unlock-area {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem;
-            margin: 1rem 0;
-            padding: 1.2rem;
-            background: #0d1117;
-            border-radius: 16px;
-            border: 1px solid #30363d;
-        }
-        .unlock-area input {
-            flex: 1 1 200px;
-        }
-        .unlock-area .hint {
-            color: #8b949e;
-            font-size: 0.85rem;
-        }
-
-        .hardcoded-notice {
-            background: #89CFF022;
-            border: 1px solid #89CFF0;
-            border-radius: 12px;
-            padding: 0.8rem 1rem;
-            margin-bottom: 1rem;
-            color: #8b949e;
-            font-size: 0.85rem;
-        }
-        .hardcoded-notice strong {
-            color: #89CFF0;
         }
 
         .tag-selector {
@@ -598,12 +518,9 @@
             .update-item {
                 padding: 1rem;
             }
-            .admin-panel {
+            .add-news-panel {
                 padding: 1.2rem;
                 width: 95%;
-            }
-            .admin-row {
-                flex-direction: column;
             }
         }
         @media (max-width: 480px) {
@@ -633,8 +550,14 @@
             <a href="#" class="active">خانه</a>
             <a href="https://verifiedgifstudio.github.io" target="_blank">وب‌سایت اصلی</a>
             
+            <!-- This button only shows when admin is unlocked -->
+            <button class="navbar-btn" id="addNewsNavBtn" style="display: none; background: #238636;">
+                ➕ افزودن خبر
+            </button>
+            
+            <!-- Admin lock/unlock button -->
             <button class="navbar-btn locked" id="navAdminBtn">
-                🔒 پنل مدیریت
+                🔒 مدیر
             </button>
             <span class="navbar-status" id="navStatus">● آنلاین</span>
         </div>
@@ -660,62 +583,49 @@
         <a href="https://verifiedgifstudio.github.io" target="_blank">بازدید از وب‌سایت</a>
     </div>
 
-    <!-- ===== ADMIN OVERLAY ===== -->
-    <div class="admin-overlay" id="adminOverlay">
-        <div class="admin-panel">
-            <div class="admin-panel-header">
-                <h2>🔐 پنل مدیریت - مدیریت اخبار</h2>
-                <button class="close-btn" id="closeAdminBtn">&times;</button>
+    <!-- ===== ADD NEWS OVERLAY (Simple Form) ===== -->
+    <div class="add-news-overlay" id="addNewsOverlay">
+        <div class="add-news-panel">
+            <div class="add-news-panel-header">
+                <h2>➕ افزودن خبر جدید</h2>
+                <button class="close-btn" id="closeAddNewsBtn">&times;</button>
             </div>
 
-            <div class="hardcoded-notice">
-                <strong>پیکربندی شده</strong>
-            </div>
-
-            <div id="adminContent">
-                <div class="unlock-area" id="unlockArea">
-                    <input type="password" id="passwordInput" placeholder="رمز عبور مدیر را وارد کنید" />
-                    <button class="btn btn-primary" id="unlockBtn">باز کردن</button>
-                    <span class="hint">فقط مدیر می‌داند :)</span>
+            <div>
+                <div class="admin-row">
+                    <div class="field-group">
+                        <label for="versionInput">عنوان / نسخه</label>
+                        <input type="text" id="versionInput" placeholder="مثلاً v2.4.0 یا 'ویژگی جدید'" />
+                    </div>
+                    <div class="field-group">
+                        <label for="dateInput">تاریخ (YYYY-MM-DD)</label>
+                        <input type="date" id="dateInput" />
+                    </div>
                 </div>
 
-                <div id="adminForm" style="display: none;">
-                    <div class="admin-row">
-                        <div class="field-group">
-                            <label for="versionInput">عنوان / نسخه</label>
-                            <input type="text" id="versionInput" placeholder="مثلاً v2.4.0 یا 'ویژگی جدید'" />
-                        </div>
-                        <div class="field-group">
-                            <label for="dateInput">تاریخ (YYYY-MM-DD)</label>
-                            <input type="date" id="dateInput" />
-                        </div>
-                    </div>
+                <label for="descInput">محتوا (هر خط یک آیتم، برای گلوله از '-' استفاده کنید)</label>
+                <textarea id="descInput" placeholder="- ویژگی جدید: خروجی SVG&#10;- رفع مشکل بارگذاری&#10;- رویداد اجتماعی اعلام شد"></textarea>
 
-                    <label for="descInput">محتوا (هر خط یک آیتم، برای گلوله از '-' استفاده کنید)</label>
-                    <textarea id="descInput" placeholder="- ویژگی جدید: خروجی SVG&#10;- رفع مشکل بارگذاری&#10;- رویداد اجتماعی اعلام شد"></textarea>
+                <label style="margin-top:0.3rem;">برچسب‌ها (برای انتخاب کلیک کنید - می‌توانید چندتایی انتخاب کنید)</label>
+                <div class="tag-selector">
+                    <span class="tag tag-news" data-tag="NEWS" id="tagNews">خبر</span>
+                    <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate">به‌روزرسانی</span>
+                    <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature">ویژگی</span>
+                    <span class="tag tag-fix" data-tag="FIX" id="tagFix">رفع مشکل</span>
+                    <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove">بهبود</span>
+                    <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement">اعلامیه</span>
+                    <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant">مهم</span>
+                    <span class="tag tag-tip" data-tag="TIP" id="tagTip">نکته</span>
+                    <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity">امنیتی</span>
+                    <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance">عملکرد</span>
+                    <span class="tag tag-event" data-tag="EVENT" id="tagEvent">رویداد</span>
+                    <span class="tag-label">انتخاب شده: <span id="selectedTagsDisplay">هیچ</span></span>
+                </div>
 
-                    <label style="margin-top:0.3rem;">برچسب‌ها (برای انتخاب کلیک کنید - می‌توانید چندتایی انتخاب کنید)</label>
-                    <div class="tag-selector">
-                        <span class="tag tag-news" data-tag="NEWS" id="tagNews">خبر</span>
-                        <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate">به‌روزرسانی</span>
-                        <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature">ویژگی</span>
-                        <span class="tag tag-fix" data-tag="FIX" id="tagFix">رفع مشکل</span>
-                        <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove">بهبود</span>
-                        <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement">اعلامیه</span>
-                        <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant">مهم</span>
-                        <span class="tag tag-tip" data-tag="TIP" id="tagTip">نکته</span>
-                        <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity">امنیتی</span>
-                        <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance">عملکرد</span>
-                        <span class="tag tag-event" data-tag="EVENT" id="tagEvent">رویداد</span>
-                        <span class="tag-label">انتخاب شده: <span id="selectedTagsDisplay">هیچ</span></span>
-                    </div>
-
-                    <div class="admin-actions">
-                        <button class="btn btn-primary" id="addUpdateBtn">➕ افزودن خبر</button>
-                        <button class="btn btn-danger" id="clearAllBtn">× حذف همه</button>
-                        <button class="btn btn-outline" id="lockBtn">🔒 قفل</button>
-                        <span class="status-msg" id="statusMsg">آماده</span>
-                    </div>
+                <div class="add-news-actions">
+                    <button class="btn btn-primary" id="addUpdateBtn">➕ افزودن خبر</button>
+                    <button class="btn btn-outline" id="cancelAddNewsBtn">انصراف</button>
+                    <span class="add-news-status" id="addNewsStatus">آماده</span>
                 </div>
             </div>
         </div>
@@ -739,24 +649,19 @@
             let updates = [];
             let selectedTags = [];
             let isUnlocked = false;
-            let editingId = null; // Use unique ID instead of index
 
             // DOM refs
             const timeline = document.getElementById('logTimeline');
-            const adminOverlay = document.getElementById('adminOverlay');
-            const unlockArea = document.getElementById('unlockArea');
-            const adminForm = document.getElementById('adminForm');
-            const passwordInput = document.getElementById('passwordInput');
-            const unlockBtn = document.getElementById('unlockBtn');
-            const lockBtn = document.getElementById('lockBtn');
-            const closeAdminBtn = document.getElementById('closeAdminBtn');
+            const addNewsOverlay = document.getElementById('addNewsOverlay');
             const navAdminBtn = document.getElementById('navAdminBtn');
+            const addNewsNavBtn = document.getElementById('addNewsNavBtn');
+            const closeAddNewsBtn = document.getElementById('closeAddNewsBtn');
+            const cancelAddNewsBtn = document.getElementById('cancelAddNewsBtn');
             const versionInput = document.getElementById('versionInput');
             const dateInput = document.getElementById('dateInput');
             const descInput = document.getElementById('descInput');
             const addBtn = document.getElementById('addUpdateBtn');
-            const clearBtn = document.getElementById('clearAllBtn');
-            const statusMsg = document.getElementById('statusMsg');
+            const addNewsStatus = document.getElementById('addNewsStatus');
             const selectedTagsDisplay = document.getElementById('selectedTagsDisplay');
             const tagElements = {
                 NEWS: document.getElementById('tagNews'),
@@ -772,6 +677,53 @@
                 EVENT: document.getElementById('tagEvent')
             };
             const navStatus = document.getElementById('navStatus');
+
+            // Password modal refs (for login)
+            const passwordInput = document.getElementById('passwordInput');
+            const unlockBtn = document.getElementById('unlockBtn');
+            const lockBtn = document.getElementById('lockBtn');
+
+            // ================================================================
+            // PASSWORD MODAL HTML (injected)
+            // ================================================================
+            // We need to add the password modal dynamically since it was removed
+            const passwordModalHTML = `
+                <div class="admin-overlay" id="adminOverlay">
+                    <div class="admin-panel" style="max-width: 450px;">
+                        <div class="admin-panel-header">
+                            <h2>🔐 ورود به پنل مدیریت</h2>
+                            <button class="close-btn" id="closeAdminBtn">&times;</button>
+                        </div>
+                        <div id="passwordContent">
+                            <div class="unlock-area" id="unlockArea">
+                                <input type="password" id="passwordInput" placeholder="رمز عبور مدیر را وارد کنید" />
+                                <button class="btn btn-primary" id="unlockBtn">ورود</button>
+                                <span class="hint">فقط مدیر می‌داند :)</span>
+                            </div>
+                            <div id="adminForm" style="display: none; margin-top: 1rem;">
+                                <p style="color: #3fb950;">✅ شما وارد شدید!</p>
+                                <button class="btn btn-outline" id="lockBtn" style="margin-top: 0.5rem;">🔒 خروج از مدیریت</button>
+                            </div>
+                            <span class="add-news-status" id="loginStatus">آماده</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Inject password modal
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = passwordModalHTML;
+            document.body.appendChild(tempDiv.firstElementChild);
+
+            // Re-fetch DOM refs for password modal
+            const adminOverlay = document.getElementById('adminOverlay');
+            const closeAdminBtn = document.getElementById('closeAdminBtn');
+            const unlockArea = document.getElementById('unlockArea');
+            const adminForm = document.getElementById('adminForm');
+            const passwordInput2 = document.getElementById('passwordInput');
+            const unlockBtn2 = document.getElementById('unlockBtn');
+            const lockBtn2 = document.getElementById('lockBtn');
+            const loginStatus = document.getElementById('loginStatus');
 
             // ================================================================
             // HASH FUNCTION
@@ -814,7 +766,6 @@
                 if (!Array.isArray(content)) {
                     throw new Error('Invalid data format. Expected an array.');
                 }
-                // Ensure each item has an ID
                 return content.map(item => {
                     if (!item.id) item.id = Date.now() + Math.random();
                     return item;
@@ -852,7 +803,6 @@
             function renderUpdates() {
                 if (!timeline) return;
                 
-                // Filter out default items and placeholders
                 const visibleUpdates = updates.filter(u => {
                     if (u._hidden === true) return false;
                     if (u._default === true) return false;
@@ -861,7 +811,7 @@
                 });
                 
                 if (!visibleUpdates || visibleUpdates.length === 0) {
-                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-right-color:#484f58; border-left: none;">هیچ خبری وجود ندارد. از طریق پنل مدیریت خبر اضافه کنید.</div>`;
+                    timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-right-color:#484f58; border-left: none;">هیچ خبری وجود ندارد. از طریق دکمه افزودن خبر در نوار بالا خبر اضافه کنید.</div>`;
                     return;
                 }
                 
@@ -903,10 +853,6 @@
                                 ${tagHtml}
                             </div>
                             <div class="update-description">${descHtml}</div>
-                            <div class="news-actions ${isUnlocked ? 'show' : ''}">
-                                <button class="action-btn edit-btn" onclick="window.editNews('${u.id}')">✏️ ویرایش</button>
-                                <button class="action-btn delete-btn" onclick="window.deleteNews('${u.id}')">🗑️ حذف</button>
-                            </div>
                         </div>
                     `;
                 });
@@ -923,83 +869,6 @@
                     return m;
                 });
             }
-
-            // ================================================================
-            // EDIT & DELETE FUNCTIONS (exposed globally)
-            // ================================================================
-            
-            window.editNews = function(id) {
-                // Find the news item by ID
-                const news = updates.find(u => u.id == id);
-                if (!news) {
-                    setStatus('خبر مورد نظر یافت نشد', '#da3633');
-                    return;
-                }
-                
-                editingId = id;
-                versionInput.value = news.version || '';
-                dateInput.value = news.date || '';
-                descInput.value = (news.desc || []).join('\n');
-                
-                // Set tags
-                selectedTags = [...(news.tags || [])];
-                updateTagDisplay();
-                Object.keys(tagElements).forEach(key => {
-                    const el = tagElements[key];
-                    if (!el) return;
-                    if (selectedTags.includes(key)) {
-                        el.classList.add('active');
-                    } else {
-                        el.classList.remove('active');
-                    }
-                });
-                
-                addBtn.textContent = '💾 ذخیره تغییرات';
-                setStatus('در حال ویرایش خبر...', '#3fb950');
-                
-                // Open admin panel if not already
-                if (!adminOverlay.classList.contains('active')) {
-                    openAdmin();
-                }
-                // Make sure form is visible
-                unlockArea.style.display = 'none';
-                adminForm.style.display = 'block';
-            };
-            
-            window.deleteNews = async function(id) {
-                // Find the news item by ID
-                const news = updates.find(u => u.id == id);
-                if (!news) {
-                    setStatus('خبر مورد نظر یافت نشد', '#da3633');
-                    return;
-                }
-                
-                if (!confirm(`آیا از حذف خبر "${news.version}" مطمئن هستید؟`)) return;
-                
-                try {
-                    // Remove the item by ID
-                    updates = updates.filter(u => u.id != id);
-                    
-                    // If no updates left, add a default one
-                    if (updates.length === 0 || updates.every(u => u._default === true || u._hidden === true)) {
-                        const defaultData = [{
-                            id: Date.now(),
-                            version: "v1.0.0",
-                            date: new Date().toISOString().slice(0, 10),
-                            desc: ["به پروژه خوش آمدید!", "اولین خبر خود را اضافه کنید."],
-                            tags: ["NEWS"],
-                            _default: true
-                        }];
-                        updates = defaultData;
-                    }
-                    await saveToGist(updates);
-                    renderUpdates();
-                    setStatus('خبر با موفقیت حذف شد', '#3fb950');
-                } catch (error) {
-                    setStatus(`خطا: ${error.message}`, '#da3633');
-                    console.error(error);
-                }
-            };
 
             // ================================================================
             // LOAD UPDATES
@@ -1025,16 +894,16 @@
             }
 
             // ================================================================
-            // ADMIN FUNCTIONS
+            // ADD NEWS FUNCTION
             // ================================================================
             async function addUpdate() {
                 const version = versionInput.value.trim();
                 const date = dateInput.value;
                 const descRaw = descInput.value;
 
-                if (!version) { setStatus('عنوان الزامی است', '#d29922'); return; }
-                if (!date) { setStatus('لطفاً تاریخ را انتخاب کنید', '#d29922'); return; }
-                if (!descRaw.trim()) { setStatus('محتوا نمی‌تواند خالی باشد', '#d29922'); return; }
+                if (!version) { setAddStatus('عنوان الزامی است', '#d29922'); return; }
+                if (!date) { setAddStatus('لطفاً تاریخ را انتخاب کنید', '#d29922'); return; }
+                if (!descRaw.trim()) { setAddStatus('محتوا نمی‌تواند خالی باشد', '#d29922'); return; }
 
                 const lines = descRaw.split('\n').map(l => l.trim()).filter(l => l.length > 0);
                 const descItems = lines.map(l => {
@@ -1050,13 +919,12 @@
                     tags: [...selectedTags]
                 };
 
-                setStatus('در حال ذخیره در GitHub Gist...', '#8b949e');
+                setAddStatus('در حال ذخیره...', '#8b949e');
                 addBtn.disabled = true;
 
                 try {
                     let currentUpdates = await fetchFromGist();
                     
-                    // Remove any default/placeholder items
                     currentUpdates = currentUpdates.filter(u => {
                         if (u._hidden === true) return false;
                         if (u._default === true) return false;
@@ -1064,23 +932,7 @@
                         return true;
                     });
                     
-                    if (editingId !== null) {
-                        // Edit mode - find and replace the item by ID
-                        const index = currentUpdates.findIndex(u => u.id == editingId);
-                        if (index !== -1) {
-                            currentUpdates[index] = newUpdate;
-                        } else {
-                            currentUpdates.push(newUpdate);
-                        }
-                        editingId = null;
-                        addBtn.textContent = '➕ افزودن خبر';
-                        setStatus('خبر با موفقیت ویرایش شد!', '#3fb950');
-                    } else {
-                        // Add mode
-                        currentUpdates.push(newUpdate);
-                        setStatus('خبر با موفقیت در GitHub Gist ذخیره شد!', '#3fb950');
-                    }
-                    
+                    currentUpdates.push(newUpdate);
                     await saveToGist(currentUpdates);
                     updates = currentUpdates;
                     renderUpdates();
@@ -1093,32 +945,16 @@
                         const el = tagElements[key];
                         if (el) el.classList.remove('active');
                     });
+                    
+                    setAddStatus('✅ خبر با موفقیت اضافه شد!', '#3fb950');
+                    setTimeout(() => {
+                        closeAddNews();
+                    }, 1500);
                 } catch (error) {
-                    setStatus(`خطا: ${error.message}`, '#da3633');
+                    setAddStatus(`❌ خطا: ${error.message}`, '#da3633');
                     console.error(error);
                 } finally {
                     addBtn.disabled = false;
-                }
-            }
-
-            async function clearAllUpdates() {
-                if (!confirm('همه اخبار حذف شوند؟ این عمل قابل بازگشت نیست.')) return;
-                setStatus('در حال حذف اخبار...', '#8b949e');
-                try {
-                    const defaultData = [{
-                        id: Date.now(),
-                        version: "v1.0.0",
-                        date: new Date().toISOString().slice(0, 10),
-                        desc: ["به پروژه خوش آمدید!", "اولین خبر خود را اضافه کنید."],
-                        tags: ["NEWS"],
-                        _default: true
-                    }];
-                    await saveToGist(defaultData);
-                    updates = defaultData;
-                    renderUpdates();
-                    setStatus('همه اخبار حذف شدند.', '#da3633');
-                } catch (error) {
-                    setStatus(`خطا: ${error.message}`, '#da3633');
                 }
             }
 
@@ -1163,31 +999,33 @@
             }
 
             // ================================================================
-            // LOCK / UNLOCK ADMIN
+            // ADMIN LOGIN/LOGOUT
             // ================================================================
             async function unlockAdmin() {
-                const pwd = passwordInput.value.trim();
+                const pwd = passwordInput2.value.trim();
                 const hashedInput = await hashPassword(pwd);
                 
                 if (hashedInput === DEFAULT_PASSWORD_HASH) {
                     isUnlocked = true;
                     unlockArea.style.display = 'none';
                     adminForm.style.display = 'block';
-                    navAdminBtn.textContent = '🔓 پنل مدیریت';
+                    navAdminBtn.textContent = '🔓 مدیر';
                     navAdminBtn.className = 'navbar-btn unlocked';
-                    setStatus('پنل مدیریت باز شد', '#3fb950');
+                    addNewsNavBtn.style.display = 'flex'; // Show the Add News button
+                    setLoginStatus('✅ وارد شدید', '#3fb950');
                     if (!dateInput.value) {
                         const today = new Date().toISOString().slice(0, 10);
                         dateInput.value = today;
                     }
-                    // Reset edit mode
-                    editingId = null;
-                    addBtn.textContent = '➕ افزودن خبر';
                     loadUpdates();
+                    // Auto-close login modal after 1 second
+                    setTimeout(() => {
+                        closeAdminLogin();
+                    }, 1000);
                 } else {
-                    setStatus('رمز عبور اشتباه است', '#da3633');
-                    passwordInput.value = '';
-                    passwordInput.focus();
+                    setLoginStatus('❌ رمز عبور اشتباه است', '#da3633');
+                    passwordInput2.value = '';
+                    passwordInput2.focus();
                 }
             }
 
@@ -1195,23 +1033,21 @@
                 isUnlocked = false;
                 unlockArea.style.display = 'flex';
                 adminForm.style.display = 'none';
-                passwordInput.value = '';
-                navAdminBtn.textContent = '🔒 پنل مدیریت';
+                passwordInput2.value = '';
+                navAdminBtn.textContent = '🔒 مدیر';
                 navAdminBtn.className = 'navbar-btn locked';
-                setStatus('قفل شد', '#8b949e');
+                addNewsNavBtn.style.display = 'none'; // Hide the Add News button
+                setLoginStatus('🔒 خارج شدید', '#8b949e');
                 Object.values(tagElements).forEach(el => { if (el) el.classList.remove('active'); });
                 selectedTags = [];
                 updateTagDisplay();
-                // Reset edit mode
-                editingId = null;
-                addBtn.textContent = '➕ افزودن خبر';
                 renderUpdates();
             }
 
             // ================================================================
             // OVERLAY CONTROLS
             // ================================================================
-            function openAdmin() {
+            function openAdminLogin() {
                 adminOverlay.classList.add('active');
                 if (isUnlocked) {
                     unlockArea.style.display = 'none';
@@ -1220,14 +1056,27 @@
                     unlockArea.style.display = 'flex';
                     adminForm.style.display = 'none';
                 }
-                loadUpdates();
             }
 
-            function closeAdmin() {
+            function closeAdminLogin() {
                 adminOverlay.classList.remove('active');
-                // Reset edit mode when closing
-                editingId = null;
-                addBtn.textContent = '➕ افزودن خبر';
+            }
+
+            function openAddNews() {
+                if (!isUnlocked) {
+                    setAddStatus('❌ ابتدا وارد شوید!', '#da3633');
+                    openAdminLogin();
+                    return;
+                }
+                addNewsOverlay.classList.add('active');
+                // Set default date
+                const today = new Date().toISOString().slice(0, 10);
+                if (dateInput) dateInput.value = today;
+                setAddStatus('آماده', '#8b949e');
+            }
+
+            function closeAddNews() {
+                addNewsOverlay.classList.remove('active');
                 versionInput.value = '';
                 descInput.value = '';
                 selectedTags = [];
@@ -1236,15 +1085,27 @@
                     const el = tagElements[key];
                     if (el) el.classList.remove('active');
                 });
+                setAddStatus('آماده', '#8b949e');
             }
 
             // ================================================================
             // UI HELPERS
             // ================================================================
             function setStatus(msg, color = '#8b949e') {
-                if (statusMsg) {
-                    statusMsg.textContent = msg;
-                    statusMsg.style.color = color || '#8b949e';
+                // For main status - not used much now
+            }
+
+            function setLoginStatus(msg, color = '#8b949e') {
+                if (loginStatus) {
+                    loginStatus.textContent = msg;
+                    loginStatus.style.color = color || '#8b949e';
+                }
+            }
+
+            function setAddStatus(msg, color = '#8b949e') {
+                if (addNewsStatus) {
+                    addNewsStatus.textContent = msg;
+                    addNewsStatus.style.color = color || '#8b949e';
                 }
             }
 
@@ -1255,24 +1116,40 @@
                 const today = new Date().toISOString().slice(0, 10);
                 if (dateInput) dateInput.value = today;
 
-                navAdminBtn.addEventListener('click', openAdmin);
-                closeAdminBtn.addEventListener('click', closeAdmin);
-                adminOverlay.addEventListener('click', function(e) {
-                    if (e.target === this) closeAdmin();
+                // Navbar buttons
+                navAdminBtn.addEventListener('click', openAdminLogin);
+                addNewsNavBtn.addEventListener('click', openAddNews);
+                
+                // Add news overlay
+                closeAddNewsBtn.addEventListener('click', closeAddNews);
+                cancelAddNewsBtn.addEventListener('click', closeAddNews);
+                addNewsOverlay.addEventListener('click', function(e) {
+                    if (e.target === this) closeAddNews();
                 });
                 document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') closeAdmin();
+                    if (e.key === 'Escape') {
+                        if (addNewsOverlay.classList.contains('active')) closeAddNews();
+                        if (adminOverlay.classList.contains('active')) closeAdminLogin();
+                    }
                 });
 
-                unlockBtn.addEventListener('click', unlockAdmin);
-                lockBtn.addEventListener('click', lockAdmin);
-                addBtn.addEventListener('click', addUpdate);
-                clearBtn.addEventListener('click', clearAllUpdates);
+                // Admin login overlay
+                closeAdminBtn.addEventListener('click', closeAdminLogin);
+                adminOverlay.addEventListener('click', function(e) {
+                    if (e.target === this) closeAdminLogin();
+                });
 
-                passwordInput.addEventListener('keydown', (e) => {
+                // Login/Logout buttons
+                unlockBtn2.addEventListener('click', unlockAdmin);
+                lockBtn2.addEventListener('click', lockAdmin);
+                passwordInput2.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') unlockAdmin();
                 });
 
+                // Add news button
+                addBtn.addEventListener('click', addUpdate);
+
+                // Tag toggles
                 Object.keys(tagElements).forEach(key => {
                     const el = tagElements[key];
                     if (el) {
@@ -1281,7 +1158,8 @@
                 });
 
                 updateTagDisplay();
-                setStatus('پنل مدیریت قفل است', '#8b949e');
+                setLoginStatus('آماده', '#8b949e');
+                addNewsNavBtn.style.display = 'none'; // Hidden by default
                 loadUpdates();
             }
 
