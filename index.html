@@ -296,6 +296,44 @@
             color: white;
         }
 
+        /* ===== NEWS ACTION BUTTONS ===== */
+        .news-actions {
+            display: none;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid #21262d;
+        }
+        .news-actions.show {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .news-actions .action-btn {
+            background: #21262d;
+            border: none;
+            color: #8b949e;
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .news-actions .action-btn:hover {
+            background: #30363d;
+            color: #f0f6fc;
+        }
+        .news-actions .action-btn.edit-btn:hover {
+            background: #1f6feb;
+            color: white;
+        }
+        .news-actions .action-btn.delete-btn:hover {
+            background: #da3633;
+            color: white;
+        }
+
         /* ===== LOGIN MODAL ===== */
         .login-overlay {
             display: none;
@@ -378,14 +416,6 @@
         }
         .login-panel .btn:hover {
             background: #2ea043;
-        }
-        .login-panel .btn-outline {
-            background: transparent;
-            border-color: #30363d;
-            color: #c9d1d9;
-        }
-        .login-panel .btn-outline:hover {
-            background: #21262d;
         }
         .login-status {
             margin-top: 0.8rem;
@@ -561,6 +591,12 @@
             align-items: center;
         }
 
+        /* ===== EDIT MODE HIGHLIGHT ===== */
+        .update-item.editing {
+            border-color: #58a6ff;
+            border-right-color: #58a6ff;
+        }
+
         /* ===== FOOTER ===== */
         .footer {
             text-align: center;
@@ -631,6 +667,9 @@
                 padding: 1.2rem;
                 width: 95%;
             }
+            .news-actions {
+                flex-wrap: wrap;
+            }
         }
         @media (max-width: 480px) {
             .navbar-brand span {
@@ -693,15 +732,15 @@
             </div>
             <input type="password" id="passwordInput" placeholder="رمز عبور مدیر را وارد کنید" />
             <button class="btn" id="loginBtn">ورود</button>
-            <span class="login-status" id="loginStatus">ادمین اینو میدونه (:</span>
+            <span class="login-status" id="loginStatus"></span>
         </div>
     </div>
 
-    <!-- ===== ADD NEWS MODAL ===== -->
+    <!-- ===== ADD/EDIT NEWS MODAL ===== -->
     <div class="add-news-overlay" id="addNewsOverlay">
         <div class="add-news-panel">
             <div class="add-news-panel-header">
-                <h2>➕ افزودن خبر جدید</h2>
+                <h2 id="formTitle">➕ افزودن خبر جدید</h2>
                 <button class="close-btn" id="closeAddNewsBtn">&times;</button>
             </div>
 
@@ -763,6 +802,7 @@
             let updates = [];
             let selectedTags = [];
             let isUnlocked = false;
+            let editingId = null;
 
             // DOM refs
             const timeline = document.getElementById('logTimeline');
@@ -782,6 +822,7 @@
             const addBtn = document.getElementById('addUpdateBtn');
             const addNewsStatus = document.getElementById('addNewsStatus');
             const selectedTagsDisplay = document.getElementById('selectedTagsDisplay');
+            const formTitle = document.getElementById('formTitle');
             const navStatus = document.getElementById('navStatus');
             const tagElements = {
                 NEWS: document.getElementById('tagNews'),
@@ -920,11 +961,15 @@
                     html += `
                         <div class="update-item" data-id="${u.id}">
                             <div class="update-meta">
-                                <span class="update-version">${escapeHtml(version)}</span>
+                                <span class="update-version">${escapeHtml(version)} <small>${date}</small></span>
                                 <span class="update-date">📅 ${escapeHtml(date)}</span>
                                 ${tagHtml}
                             </div>
                             <div class="update-description">${descHtml}</div>
+                            <div class="news-actions ${isUnlocked ? 'show' : ''}">
+                                <button class="action-btn edit-btn" onclick="window.editNews('${u.id}')">✏️ ویرایش</button>
+                                <button class="action-btn delete-btn" onclick="window.deleteNews('${u.id}')">🗑️ حذف</button>
+                            </div>
                         </div>
                     `;
                 });
@@ -941,6 +986,77 @@
                     return m;
                 });
             }
+
+            // ================================================================
+            // EDIT & DELETE FUNCTIONS
+            // ================================================================
+            
+            window.editNews = function(id) {
+                if (!isUnlocked) return;
+                
+                const news = updates.find(u => u.id == id);
+                if (!news) {
+                    setAddStatus('❌ خبر مورد نظر یافت نشد', '#da3633');
+                    return;
+                }
+                
+                editingId = id;
+                versionInput.value = news.version || '';
+                dateInput.value = news.date || '';
+                descInput.value = (news.desc || []).join('\n');
+                
+                selectedTags = [...(news.tags || [])];
+                updateTagDisplay();
+                Object.keys(tagElements).forEach(key => {
+                    const el = tagElements[key];
+                    if (!el) return;
+                    if (selectedTags.includes(key)) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.remove('active');
+                    }
+                });
+                
+                formTitle.textContent = '✏️ ویرایش خبر';
+                addBtn.textContent = '💾 ذخیره تغییرات';
+                setAddStatus('در حال ویرایش خبر...', '#3fb950');
+                addNewsOverlay.classList.add('active');
+            };
+            
+            window.deleteNews = async function(id) {
+                if (!isUnlocked) return;
+                
+                const news = updates.find(u => u.id == id);
+                if (!news) {
+                    setAddStatus('❌ خبر مورد نظر یافت نشد', '#da3633');
+                    return;
+                }
+                
+                if (!confirm(`آیا از حذف خبر "${news.version}" مطمئن هستید؟`)) return;
+                
+                try {
+                    updates = updates.filter(u => u.id != id);
+                    
+                    if (updates.length === 0 || updates.every(u => u._default === true || u._hidden === true)) {
+                        const defaultData = [{
+                            id: Date.now(),
+                            version: "v1.0.0",
+                            date: new Date().toISOString().slice(0, 10),
+                            desc: ["به پروژه خوش آمدید!", "اولین خبر خود را اضافه کنید."],
+                            tags: ["NEWS"],
+                            _default: true
+                        }];
+                        updates = defaultData;
+                    }
+                    await saveToGist(updates);
+                    renderUpdates();
+                    setAddStatus('✅ خبر با موفقیت حذف شد', '#3fb950');
+                    setTimeout(() => setAddStatus('آماده', '#8b949e'), 2000);
+                } catch (error) {
+                    setAddStatus(`❌ خطا: ${error.message}`, '#da3633');
+                    console.error(error);
+                }
+            };
 
             // ================================================================
             // LOAD UPDATES
@@ -963,9 +1079,9 @@
             }
 
             // ================================================================
-            // ADD NEWS
+            // ADD / EDIT NEWS
             // ================================================================
-            async function addUpdate() {
+            async function saveNews() {
                 const version = versionInput.value.trim();
                 const date = dateInput.value;
                 const descRaw = descInput.value;
@@ -981,7 +1097,7 @@
                 });
 
                 const newUpdate = {
-                    id: Date.now(),
+                    id: editingId || Date.now(),
                     version: version,
                     date: date,
                     desc: descItems,
@@ -1001,21 +1117,24 @@
                         return true;
                     });
                     
-                    currentUpdates.push(newUpdate);
+                    if (editingId !== null) {
+                        const index = currentUpdates.findIndex(u => u.id == editingId);
+                        if (index !== -1) {
+                            currentUpdates[index] = newUpdate;
+                        } else {
+                            currentUpdates.push(newUpdate);
+                        }
+                        setAddStatus('✅ خبر با موفقیت ویرایش شد!', '#3fb950');
+                    } else {
+                        currentUpdates.push(newUpdate);
+                        setAddStatus('✅ خبر با موفقیت اضافه شد!', '#3fb950');
+                    }
+                    
                     await saveToGist(currentUpdates);
                     updates = currentUpdates;
                     renderUpdates();
                     
-                    versionInput.value = '';
-                    descInput.value = '';
-                    selectedTags = [];
-                    updateTagDisplay();
-                    Object.keys(tagElements).forEach(key => {
-                        const el = tagElements[key];
-                        if (el) el.classList.remove('active');
-                    });
-                    
-                    setAddStatus('✅ خبر با موفقیت اضافه شد!', '#3fb950');
+                    resetForm();
                     setTimeout(() => {
                         closeAddNews();
                     }, 1500);
@@ -1025,6 +1144,22 @@
                 } finally {
                     addBtn.disabled = false;
                 }
+            }
+
+            function resetForm() {
+                versionInput.value = '';
+                descInput.value = '';
+                selectedTags = [];
+                editingId = null;
+                formTitle.textContent = '➕ افزودن خبر جدید';
+                addBtn.textContent = '➕ افزودن خبر';
+                updateTagDisplay();
+                Object.keys(tagElements).forEach(key => {
+                    const el = tagElements[key];
+                    if (el) el.classList.remove('active');
+                });
+                const today = new Date().toISOString().slice(0, 10);
+                if (dateInput) dateInput.value = today;
             }
 
             // ================================================================
@@ -1086,6 +1221,7 @@
                         dateInput.value = today;
                     }
                     loadUpdates();
+                    renderUpdates();
                     setTimeout(() => {
                         closeLogin();
                     }, 800);
@@ -1098,6 +1234,7 @@
             }
 
             function logout() {
+                if (!confirm('آیا از مدیریت خارج می‌شوید؟')) return;
                 isUnlocked = false;
                 adminLoginBtn.textContent = '🔒 مدیر';
                 adminLoginBtn.className = 'navbar-btn admin-login';
@@ -1113,7 +1250,7 @@
             // ================================================================
             function openLogin() {
                 loginOverlay.classList.add('active');
-                loginStatus.textContent = 'رمز پیش‌فرض: admin123';
+                loginStatus.textContent = '';
                 loginStatus.className = 'login-status';
                 passwordInput.value = '';
                 passwordInput.focus();
@@ -1132,22 +1269,14 @@
                     openLogin();
                     return;
                 }
+                resetForm();
                 addNewsOverlay.classList.add('active');
-                const today = new Date().toISOString().slice(0, 10);
-                if (dateInput) dateInput.value = today;
                 setAddStatus('آماده', '#8b949e');
             }
 
             function closeAddNews() {
                 addNewsOverlay.classList.remove('active');
-                versionInput.value = '';
-                descInput.value = '';
-                selectedTags = [];
-                updateTagDisplay();
-                Object.keys(tagElements).forEach(key => {
-                    const el = tagElements[key];
-                    if (el) el.classList.remove('active');
-                });
+                resetForm();
                 setAddStatus('آماده', '#8b949e');
             }
 
@@ -1168,19 +1297,15 @@
                 const today = new Date().toISOString().slice(0, 10);
                 if (dateInput) dateInput.value = today;
 
-                // Navbar buttons
                 adminLoginBtn.addEventListener('click', function() {
                     if (isUnlocked) {
-                        if (confirm('آیا از مدیریت خارج می‌شوید؟')) {
-                            logout();
-                        }
+                        logout();
                     } else {
                         openLogin();
                     }
                 });
                 addNewsBtn.addEventListener('click', openAddNews);
 
-                // Login modal
                 closeLoginBtn.addEventListener('click', closeLogin);
                 loginOverlay.addEventListener('click', function(e) {
                     if (e.target === this) closeLogin();
@@ -1196,15 +1321,13 @@
                     }
                 });
 
-                // Add news modal
                 closeAddNewsBtn.addEventListener('click', closeAddNews);
                 cancelAddNewsBtn.addEventListener('click', closeAddNews);
                 addNewsOverlay.addEventListener('click', function(e) {
                     if (e.target === this) closeAddNews();
                 });
-                addBtn.addEventListener('click', addUpdate);
+                addBtn.addEventListener('click', saveNews);
 
-                // Tag toggles
                 Object.keys(tagElements).forEach(key => {
                     const el = tagElements[key];
                     if (el) {
