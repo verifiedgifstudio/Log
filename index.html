@@ -232,7 +232,7 @@
             color: #89CFF0;
         }
 
-        /* ===== TAGS - MORE OPTIONS ===== */
+        /* ===== TAGS ===== */
         .tag {
             font-size: 0.65rem;
             font-weight: 600;
@@ -289,7 +289,7 @@
             color: white;
         }
 
-        /* ===== ADMIN PANEL (Popup/Modal Style) ===== */
+        /* ===== ADMIN PANEL ===== */
         .admin-overlay {
             display: none;
             position: fixed;
@@ -622,7 +622,7 @@
         <a href="https://verifiedgifstudio.github.io" target="_blank">بازدید از وب‌سایت</a>
     </div>
 
-    <!-- ===== ADMIN OVERLAY (Modal) ===== -->
+    <!-- ===== ADMIN OVERLAY ===== -->
     <div class="admin-overlay" id="adminOverlay">
         <div class="admin-panel">
             <div class="admin-panel-header">
@@ -686,7 +686,7 @@
     <script>
         (function() {
             // ================================================================
-            // HARDCODED CREDENTIALS - SPLIT TO BYPASS GITHUB SCANNING
+            // HARDCODED CREDENTIALS
             // ================================================================
             
             const GIST_ID = 'c2541667709a9a415e05805df608ab37';
@@ -760,7 +760,15 @@
                 const data = await response.json();
                 const file = data.files['updates.json'];
                 if (!file) {
-                    throw new Error('File "updates.json" not found in gist.');
+                    // If file doesn't exist, create default data
+                    const defaultData = [{
+                        version: "v1.0.0",
+                        date: new Date().toISOString().slice(0, 10),
+                        desc: ["به پروژه خوش آمدید!", "اولین خبر"],
+                        tags: ["NEWS"]
+                    }];
+                    await saveToGist(defaultData);
+                    return defaultData;
                 }
                 const content = JSON.parse(file.content);
                 if (!Array.isArray(content)) {
@@ -799,11 +807,19 @@
             // ================================================================
             function renderUpdates() {
                 if (!timeline) return;
-                const visibleUpdates = updates.filter(u => !u._hidden);
+                
+                // Filter out placeholder items - check for _hidden flag OR placeholder version
+                const visibleUpdates = updates.filter(u => {
+                    if (u._hidden === true) return false;
+                    if (u.version && u.version.toLowerCase().includes('placeholder')) return false;
+                    return true;
+                });
+                
                 if (!visibleUpdates || visibleUpdates.length === 0) {
                     timeline.innerHTML = `<div class="update-item" style="text-align:center; color:#8b949e; border-right-color:#484f58; border-left: none;">هیچ خبری وجود ندارد. از طریق پنل مدیریت خبر اضافه کنید.</div>`;
                     return;
                 }
+                
                 const sorted = [...visibleUpdates].sort((a, b) => (a.date < b.date ? 1 : -1));
                 let html = '';
                 sorted.forEach(u => {
@@ -911,9 +927,15 @@
 
                 try {
                     const currentUpdates = await fetchFromGist();
-                    currentUpdates.push(newUpdate);
-                    await saveToGist(currentUpdates);
-                    updates = currentUpdates;
+                    // Remove any placeholder items before adding new one
+                    const cleanUpdates = currentUpdates.filter(u => {
+                        if (u._hidden === true) return false;
+                        if (u.version && u.version.toLowerCase().includes('placeholder')) return false;
+                        return true;
+                    });
+                    cleanUpdates.push(newUpdate);
+                    await saveToGist(cleanUpdates);
+                    updates = cleanUpdates;
                     renderUpdates();
                     versionInput.value = '';
                     descInput.value = '';
@@ -932,17 +954,17 @@
                 if (!confirm('همه اخبار حذف شوند؟ این عمل قابل بازگشت نیست.')) return;
                 setStatus('در حال حذف اخبار...', '#8b949e');
                 try {
-                    const placeholder = [{
-                        _hidden: true,
-                        version: 'placeholder',
-                        date: '2000-01-01',
-                        desc: ['این یک جای‌گیر مخفی است تا Gist خالی نماند.'],
-                        tags: []
+                    // Keep one default entry instead of a placeholder
+                    const defaultData = [{
+                        version: "v1.0.0",
+                        date: new Date().toISOString().slice(0, 10),
+                        desc: ["به پروژه خوش آمدید!", "اولین خبر خود را اضافه کنید."],
+                        tags: ["NEWS"]
                     }];
-                    await saveToGist(placeholder);
-                    updates = placeholder;
+                    await saveToGist(defaultData);
+                    updates = defaultData;
                     renderUpdates();
-                    setStatus('همه اخبار حذف شدند.', '#da3633');
+                    setStatus('همه اخبار حذف شدند. یک خبر پیش‌فرض اضافه شد.', '#da3633');
                 } catch (error) {
                     setStatus(`خطا: ${error.message}`, '#da3633');
                 }
