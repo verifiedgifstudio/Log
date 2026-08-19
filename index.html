@@ -87,39 +87,53 @@
             border: none;
             padding: 0.4rem 1.2rem;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.12s ease;
             display: flex;
             align-items: center;
             gap: 6px;
+            position: relative;
+            transform: translateY(0);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
         }
-        .navbar-btn:hover {
-            transform: scale(1.02);
+        .navbar-btn:active {
+            transform: translateY(2px) !important;
         }
         .navbar-btn.add-news {
-            background: #238636;
+            background: linear-gradient(180deg, #3ea84a 0%, #238636 50%, #1a6f2a 100%);
             color: white;
+            border: 1px solid #1a6f2a;
+            box-shadow: 0 3px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 8px rgba(35, 134, 54, 0.3);
             display: none;
         }
         .navbar-btn.add-news:hover {
-            background: #2ea043;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(35, 134, 54, 0.4);
         }
         .navbar-btn.admin-login {
-            background: #21262d;
+            background: linear-gradient(180deg, #3d444d 0%, #21262d 50%, #161b22 100%);
             color: #8b949e;
+            border: 1px solid #30363d;
+            box-shadow: 0 3px 0 #0d1117, inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-shadow: none;
         }
         .navbar-btn.admin-login:hover {
-            background: #30363d;
+            transform: translateY(-2px);
             color: #f0f6fc;
+            box-shadow: 0 5px 0 #0d1117, inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         .navbar-btn.admin-login.logged-in {
-            background: #da3633;
+            background: linear-gradient(180deg, #f04a47 0%, #da3633 50%, #b82a2a 100%);
             color: white;
+            border: 1px solid #b82a2a;
+            box-shadow: 0 3px 0 #8a1f1f, inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 8px rgba(218, 54, 51, 0.3);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
         }
         .navbar-btn.admin-login.logged-in:hover {
-            background: #f85149;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #8a1f1f, inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(218, 54, 51, 0.4);
         }
         .navbar-status {
             font-size: 0.75rem;
@@ -239,67 +253,88 @@
             color: #89CFF0;
         }
 
-        /* ===== TAGS ===== */
+        /* ===== TAGS - 3D Style ===== */
         .tag {
             font-size: 0.65rem;
-            font-weight: 600;
-            padding: 0.1rem 0.6rem;
+            font-weight: 700;
+            padding: 0.15rem 0.7rem;
             border-radius: 30px;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.6px;
             margin-right: 4px;
             vertical-align: middle;
             display: inline-block;
+            position: relative;
+            box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+            transition: all 0.12s ease;
+            cursor: default;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+        }
+        .tag:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.25);
         }
         .tag-news {
-            background: #89CFF0;
+            background: linear-gradient(180deg, #a0d8f5 0%, #89CFF0 50%, #70b8e0 100%);
             color: #0d1117;
+            border: 1px solid #70b8e0;
         }
         .tag-update {
-            background: #238636;
+            background: linear-gradient(180deg, #3ea84a 0%, #238636 50%, #1a6f2a 100%);
             color: white;
+            border: 1px solid #1a6f2a;
         }
         .tag-fix {
-            background: #da3633;
+            background: linear-gradient(180deg, #f04a47 0%, #da3633 50%, #b82a2a 100%);
             color: white;
+            border: 1px solid #b82a2a;
         }
         .tag-improve {
-            background: #d29922;
+            background: linear-gradient(180deg, #e8b84a 0%, #d29922 50%, #b8801a 100%);
             color: #0d1117;
+            border: 1px solid #b8801a;
         }
         .tag-feature {
-            background: #7c3aed;
+            background: linear-gradient(180deg, #9a5cf0 0%, #7c3aed 50%, #6228c9 100%);
             color: white;
+            border: 1px solid #6228c9;
         }
         .tag-announcement {
-            background: #f59e0b;
+            background: linear-gradient(180deg, #f8b52a 0%, #f59e0b 50%, #d4880a 100%);
             color: #0d1117;
+            border: 1px solid #d4880a;
         }
         .tag-important {
-            background: #ef4444;
+            background: linear-gradient(180deg, #f85a5a 0%, #ef4444 50%, #d63333 100%);
             color: white;
+            border: 1px solid #d63333;
         }
         .tag-tip {
-            background: #3b82f6;
+            background: linear-gradient(180deg, #5a9cf8 0%, #3b82f6 50%, #2a6fd9 100%);
             color: white;
+            border: 1px solid #2a6fd9;
         }
         .tag-security {
-            background: #8b5cf6;
+            background: linear-gradient(180deg, #a06cf8 0%, #8b5cf6 50%, #7646e0 100%);
             color: white;
+            border: 1px solid #7646e0;
         }
         .tag-performance {
-            background: #06b6d4;
+            background: linear-gradient(180deg, #2ad4e8 0%, #06b6d4 50%, #0599b8 100%);
             color: #0d1117;
+            border: 1px solid #0599b8;
         }
         .tag-event {
-            background: #ec4899;
+            background: linear-gradient(180deg, #f05a9e 0%, #ec4899 50%, #d63384 100%);
             color: white;
+            border: 1px solid #d63384;
         }
 
-        /* ===== NEWS ACTION BUTTONS ===== */
+        /* ===== NEWS ACTION BUTTONS - 3D Style ===== */
         .news-actions {
             display: none;
-            gap: 0.5rem;
+            gap: 0.6rem;
             margin-top: 0.8rem;
             padding-top: 0.8rem;
             border-top: 1px solid #21262d;
@@ -309,29 +344,42 @@
             flex-wrap: wrap;
         }
         .news-actions .action-btn {
-            background: #21262d;
             border: none;
-            color: #8b949e;
-            padding: 0.3rem 0.8rem;
+            padding: 0.35rem 1rem;
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.85rem;
-            transition: all 0.2s;
+            font-weight: 600;
+            transition: all 0.12s ease;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
+            position: relative;
+            transform: translateY(0);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
         }
-        .news-actions .action-btn:hover {
-            background: #30363d;
-            color: #f0f6fc;
+        .news-actions .action-btn:active {
+            transform: translateY(2px) !important;
+        }
+        .news-actions .action-btn.edit-btn {
+            background: linear-gradient(180deg, #4a8af0 0%, #1f6feb 50%, #1558c9 100%);
+            color: white;
+            border: 1px solid #1558c9;
+            box-shadow: 0 3px 0 #0f4a8a, inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 8px rgba(31, 111, 235, 0.3);
         }
         .news-actions .action-btn.edit-btn:hover {
-            background: #1f6feb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #0f4a8a, inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(31, 111, 235, 0.4);
+        }
+        .news-actions .action-btn.delete-btn {
+            background: linear-gradient(180deg, #f04a47 0%, #da3633 50%, #b82a2a 100%);
             color: white;
+            border: 1px solid #b82a2a;
+            box-shadow: 0 3px 0 #8a1f1f, inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 8px rgba(218, 54, 51, 0.3);
         }
         .news-actions .action-btn.delete-btn:hover {
-            background: #da3633;
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #8a1f1f, inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(218, 54, 51, 0.4);
         }
 
         /* ===== LOGIN MODAL ===== */
@@ -403,19 +451,28 @@
             outline: none;
         }
         .login-panel .btn {
-            background: #238636;
-            border: 1px solid #2ea043;
+            background: linear-gradient(180deg, #3ea84a 0%, #238636 50%, #1a6f2a 100%);
+            border: 1px solid #1a6f2a;
             color: white;
             padding: 0.5rem 1.4rem;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.15s;
+            transition: all 0.12s ease;
             width: 100%;
+            position: relative;
+            box-shadow: 0 3px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 8px rgba(35, 134, 54, 0.3);
+            transform: translateY(0);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
         }
         .login-panel .btn:hover {
-            background: #2ea043;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(35, 134, 54, 0.4);
+        }
+        .login-panel .btn:active {
+            transform: translateY(2px) !important;
+            box-shadow: 0 1px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         .login-status {
             margin-top: 0.8rem;
@@ -517,38 +574,49 @@
             resize: vertical;
         }
         .add-news-panel .btn {
-            background: #21262d;
-            border: 1px solid #30363d;
-            color: #c9d1d9;
             padding: 0.5rem 1.4rem;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.15s;
+            transition: all 0.12s ease;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            position: relative;
+            transform: translateY(0);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+        }
+        .add-news-panel .btn:active {
+            transform: translateY(2px) !important;
         }
         .add-news-panel .btn-primary {
-            background: #238636;
-            border-color: #2ea043;
+            background: linear-gradient(180deg, #3ea84a 0%, #238636 50%, #1a6f2a 100%);
+            border: 1px solid #1a6f2a;
             color: white;
+            box-shadow: 0 3px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 8px rgba(35, 134, 54, 0.3);
         }
         .add-news-panel .btn-primary:hover {
-            background: #2ea043;
-            border-color: #3fb950;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(35, 134, 54, 0.4);
         }
         .add-news-panel .btn-primary:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
+            transform: translateY(0) !important;
             cursor: not-allowed;
+            box-shadow: 0 2px 0 #125520, inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         .add-news-panel .btn-outline {
-            background: transparent;
-            border-color: #30363d;
+            background: linear-gradient(180deg, #3d444d 0%, #21262d 50%, #161b22 100%);
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            box-shadow: 0 3px 0 #0d1117, inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-shadow: none;
         }
         .add-news-panel .btn-outline:hover {
-            background: #21262d;
+            transform: translateY(-2px);
+            color: #f0f6fc;
+            box-shadow: 0 5px 0 #0d1117, inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         .add-news-actions {
             display: flex;
@@ -581,7 +649,7 @@
         }
         .tag-selector .tag.active {
             opacity: 1;
-            box-shadow: 0 0 0 2px #f0f6fc;
+            box-shadow: 0 0 0 2px #f0f6fc, 0 3px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2);
         }
         .tag-selector .tag-label {
             color: #8b949e;
