@@ -739,7 +739,7 @@
             let updates = [];
             let selectedTags = [];
             let isUnlocked = false;
-            let editingIndex = null; // Track which news is being edited
+            let editingId = null; // Use unique ID instead of index
 
             // DOM refs
             const timeline = document.getElementById('logTimeline');
@@ -800,11 +800,12 @@
                 const file = data.files['updates.json'];
                 if (!file) {
                     const defaultData = [{
+                        id: Date.now(),
                         version: "v1.0.0",
                         date: new Date().toISOString().slice(0, 10),
                         desc: ["به پروژه خوش آمدید!", "اولین خبر خود را اضافه کنید."],
                         tags: ["NEWS"],
-                        _default: true // Mark as default to hide it
+                        _default: true
                     }];
                     await saveToGist(defaultData);
                     return defaultData;
@@ -813,7 +814,11 @@
                 if (!Array.isArray(content)) {
                     throw new Error('Invalid data format. Expected an array.');
                 }
-                return content;
+                // Ensure each item has an ID
+                return content.map(item => {
+                    if (!item.id) item.id = Date.now() + Math.random();
+                    return item;
+                });
             }
 
             async function saveToGist(updatesArray) {
@@ -862,7 +867,7 @@
                 
                 const sorted = [...visibleUpdates].sort((a, b) => (a.date < b.date ? 1 : -1));
                 let html = '';
-                sorted.forEach((u, index) => {
+                sorted.forEach(u => {
                     const version = u.version || 'v?';
                     const date = u.date || 'YYYY-MM-DD';
                     const descItems = Array.isArray(u.desc) ? u.desc : [];
@@ -890,11 +895,8 @@
                         return `<span class="tag tag-${tagClass}">${label}</span>`;
                     }).join(' ');
                     
-                    // Find the actual index in the updates array
-                    const realIndex = updates.indexOf(u);
-                    
                     html += `
-                        <div class="update-item" data-index="${realIndex}">
+                        <div class="update-item" data-id="${u.id}">
                             <div class="update-meta">
                                 <span class="update-version">${escapeHtml(version)} <small>${date}</small></span>
                                 <span class="update-date">📅 ${escapeHtml(date)}</span>
@@ -902,8 +904,8 @@
                             </div>
                             <div class="update-description">${descHtml}</div>
                             <div class="news-actions ${isUnlocked ? 'show' : ''}">
-                                <button class="action-btn edit-btn" onclick="window.editNews(${realIndex})">✏️ ویرایش</button>
-                                <button class="action-btn delete-btn" onclick="window.deleteNews(${realIndex})">🗑️ حذف</button>
+                                <button class="action-btn edit-btn" onclick="window.editNews('${u.id}')">✏️ ویرایش</button>
+                                <button class="action-btn delete-btn" onclick="window.deleteNews('${u.id}')">🗑️ حذف</button>
                             </div>
                         </div>
                     `;
@@ -926,11 +928,15 @@
             // EDIT & DELETE FUNCTIONS (exposed globally)
             // ================================================================
             
-            window.editNews = function(index) {
-                const news = updates[index];
-                if (!news) return;
+            window.editNews = function(id) {
+                // Find the news item by ID
+                const news = updates.find(u => u.id == id);
+                if (!news) {
+                    setStatus('خبر مورد نظر یافت نشد', '#da3633');
+                    return;
+                }
                 
-                editingIndex = index;
+                editingId = id;
                 versionInput.value = news.version || '';
                 dateInput.value = news.date || '';
                 descInput.value = (news.desc || []).join('\n');
@@ -960,17 +966,24 @@
                 adminForm.style.display = 'block';
             };
             
-            window.deleteNews = async function(index) {
-                const news = updates[index];
-                if (!news) return;
+            window.deleteNews = async function(id) {
+                // Find the news item by ID
+                const news = updates.find(u => u.id == id);
+                if (!news) {
+                    setStatus('خبر مورد نظر یافت نشد', '#da3633');
+                    return;
+                }
+                
                 if (!confirm(`آیا از حذف خبر "${news.version}" مطمئن هستید؟`)) return;
                 
                 try {
-                    // Remove the item
-                    updates.splice(index, 1);
+                    // Remove the item by ID
+                    updates = updates.filter(u => u.id != id);
+                    
                     // If no updates left, add a default one
                     if (updates.length === 0 || updates.every(u => u._default === true || u._hidden === true)) {
                         const defaultData = [{
+                            id: Date.now(),
                             version: "v1.0.0",
                             date: new Date().toISOString().slice(0, 10),
                             desc: ["به پروژه خوش آمدید!", "اولین خبر خود را اضافه کنید."],
@@ -1030,6 +1043,7 @@
                 });
 
                 const newUpdate = {
+                    id: Date.now(),
                     version: version,
                     date: date,
                     desc: descItems,
@@ -1050,15 +1064,15 @@
                         return true;
                     });
                     
-                    if (editingIndex !== null) {
-                        // Edit mode - replace the item at editingIndex
-                        const realIndex = currentUpdates.indexOf(updates[editingIndex]);
-                        if (realIndex !== -1) {
-                            currentUpdates[realIndex] = newUpdate;
+                    if (editingId !== null) {
+                        // Edit mode - find and replace the item by ID
+                        const index = currentUpdates.findIndex(u => u.id == editingId);
+                        if (index !== -1) {
+                            currentUpdates[index] = newUpdate;
                         } else {
                             currentUpdates.push(newUpdate);
                         }
-                        editingIndex = null;
+                        editingId = null;
                         addBtn.textContent = '➕ افزودن خبر';
                         setStatus('خبر با موفقیت ویرایش شد!', '#3fb950');
                     } else {
@@ -1092,6 +1106,7 @@
                 setStatus('در حال حذف اخبار...', '#8b949e');
                 try {
                     const defaultData = [{
+                        id: Date.now(),
                         version: "v1.0.0",
                         date: new Date().toISOString().slice(0, 10),
                         desc: ["به پروژه خوش آمدید!", "اولین خبر خود را اضافه کنید."],
@@ -1166,7 +1181,7 @@
                         dateInput.value = today;
                     }
                     // Reset edit mode
-                    editingIndex = null;
+                    editingId = null;
                     addBtn.textContent = '➕ افزودن خبر';
                     loadUpdates();
                 } else {
@@ -1188,7 +1203,7 @@
                 selectedTags = [];
                 updateTagDisplay();
                 // Reset edit mode
-                editingIndex = null;
+                editingId = null;
                 addBtn.textContent = '➕ افزودن خبر';
                 renderUpdates();
             }
@@ -1211,7 +1226,7 @@
             function closeAdmin() {
                 adminOverlay.classList.remove('active');
                 // Reset edit mode when closing
-                editingIndex = null;
+                editingId = null;
                 addBtn.textContent = '➕ افزودن خبر';
                 versionInput.value = '';
                 descInput.value = '';
