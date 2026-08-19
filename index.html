@@ -291,7 +291,9 @@
             letter-spacing: 0.6px;
             margin-right: 4px;
             vertical-align: middle;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             position: relative;
             box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 2px 6px rgba(0, 0, 0, 0.15);
             transform: translateY(0);
@@ -961,6 +963,21 @@
                 EVENT: document.getElementById('tagEvent')
             };
 
+            // Tag icon mapping for display in main news
+            const tagIcons = {
+                'NEWS': 'bi-megaphone-fill',
+                'UPDATE': 'bi-arrow-clockwise',
+                'FEATURE': 'bi-stars',
+                'FIX': 'bi-wrench',
+                'IMPROVE': 'bi-star-fill',
+                'ANNOUNCEMENT': 'bi-megaphone',
+                'IMPORTANT': 'bi-exclamation-triangle-fill',
+                'TIP': 'bi-lightbulb-fill',
+                'SECURITY': 'bi-shield-check-fill',
+                'PERFORMANCE': 'bi-speedometer2',
+                'EVENT': 'bi-cup-hot-fill'
+            };
+
             // ================================================================
             // HASH FUNCTION
             // ================================================================
@@ -1078,7 +1095,8 @@
                             'event': 'رویداد'
                         };
                         const label = tagLabels[tagClass] || t;
-                        return `<span class="tag tag-${tagClass}">${label}</span>`;
+                        const icon = tagIcons[t.toUpperCase()] || 'bi-tag-fill';
+                        return `<span class="tag tag-${tagClass}"><i class="${icon}"></i> ${label}</span>`;
                     }).join(' ');
                     
                     html += `
@@ -1140,8 +1158,8 @@
                     }
                 });
                 
-                formTitle.textContent = '<i class="bi bi-pencil-square"></i> ویرایش خبر';
-                addBtn.textContent = '<i class="bi bi-save-fill"></i> ذخیره تغییرات';
+                formTitle.innerHTML = '<i class="bi bi-pencil-square"></i> ویرایش خبر';
+                addBtn.innerHTML = '<i class="bi bi-save-fill"></i> ذخیره تغییرات';
                 setAddStatus('در حال ویرایش خبر...', '#3fb950');
                 addNewsOverlay.classList.add('active');
             };
@@ -1274,8 +1292,8 @@
                 descInput.value = '';
                 selectedTags = [];
                 editingId = null;
-                formTitle.textContent = '<i class="bi bi-plus-square-fill"></i> افزودن خبر جدید';
-                addBtn.textContent = '<i class="bi bi-send-plus-fill"></i> افزودن خبر';
+                formTitle.innerHTML = '<i class="bi bi-plus-square-fill"></i> افزودن خبر جدید';
+                addBtn.innerHTML = '<i class="bi bi-send-plus-fill"></i> افزودن خبر';
                 updateTagDisplay();
                 Object.keys(tagElements).forEach(key => {
                     const el = tagElements[key];
@@ -1337,7 +1355,7 @@
                     adminLoginBtn.innerHTML = '<i class="bi bi-unlock-fill"></i> مدیر';
                     adminLoginBtn.className = 'navbar-btn admin-login logged-in';
                     addNewsBtn.style.display = 'flex';
-                    loginStatus.textContent = '<i class="bi bi-check-circle-fill"></i> وارد شدید!';
+                    loginStatus.innerHTML = '<i class="bi bi-check-circle-fill"></i> وارد شدید!';
                     loginStatus.className = 'login-status success';
                     if (!dateInput.value) {
                         const today = new Date().toISOString().slice(0, 10);
@@ -1349,7 +1367,7 @@
                         closeLogin();
                     }, 800);
                 } else {
-                    loginStatus.textContent = '<i class="bi bi-x-circle-fill"></i> رمز عبور اشتباه است';
+                    loginStatus.innerHTML = '<i class="bi bi-x-circle-fill"></i> رمز عبور اشتباه است';
                     loginStatus.className = 'login-status error';
                     passwordInput.value = '';
                     passwordInput.focus();
@@ -1373,7 +1391,7 @@
             // ================================================================
             function openLogin() {
                 loginOverlay.classList.add('active');
-                loginStatus.textContent = '';
+                loginStatus.innerHTML = '';
                 loginStatus.className = 'login-status';
                 passwordInput.value = '';
                 passwordInput.focus();
