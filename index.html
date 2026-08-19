@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Verified GIF Studio - اخبار و به‌روزرسانی‌ها</title>
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <style>
         * {
             margin: 0;
@@ -819,8 +821,8 @@
         <div class="navbar-links">
             <a href="https://VerfiedGIFStudio.github.io" class="active">خانه</a>
             
-            <button class="navbar-btn add-news" id="addNewsBtn">➕ افزودن خبر</button>
-            <button class="navbar-btn admin-login" id="adminLoginBtn">🔒 مدیر</button>
+            <button class="navbar-btn add-news" id="addNewsBtn"><i class="bi bi-person-plus"></i> افزودن خبر</button>
+            <button class="navbar-btn admin-login" id="adminLoginBtn"><i class="bi bi-lock"></i> مدیر</button>
             <span class="navbar-status" id="navStatus">● آنلاین</span>
         </div>
     </nav>
@@ -829,7 +831,7 @@
     <div class="main-content">
         <div class="log-container">
             <div class="log-header">
-                <h1>📰 اخبار و به‌روزرسانی‌ها <span>آخرین اخبار</span></h1>
+                <h1><i class="bi bi-newspaper"></i> اخبار و به‌روزرسانی‌ها <span>آخرین اخبار</span></h1>
                 <div class="badge">خبر آپدیت</div>
             </div>
             <div class="update-timeline" id="logTimeline">
@@ -848,7 +850,7 @@
     <div class="login-overlay" id="loginOverlay">
         <div class="login-panel">
             <div class="login-panel-header">
-                <h2>🔐 ورود به مدیریت</h2>
+                <h2><i class="bi bi-unlock2"></i> ورود به مدیریت</h2>
                 <button class="close-btn" id="closeLoginBtn">&times;</button>
             </div>
             <input type="password" id="passwordInput" placeholder="رمز عبور مدیر را وارد کنید" />
@@ -861,7 +863,7 @@
     <div class="add-news-overlay" id="addNewsOverlay">
         <div class="add-news-panel">
             <div class="add-news-panel-header">
-                <h2 id="formTitle">➕ افزودن خبر جدید</h2>
+                <h2 id="formTitle"><i class="bi bi-plus-square"></i> افزودن خبر جدید</h2>
                 <button class="close-btn" id="closeAddNewsBtn">&times;</button>
             </div>
 
@@ -882,22 +884,22 @@
 
                 <label style="margin-top:0.3rem;">برچسب‌ها (برای انتخاب کلیک کنید - می‌توانید چندتایی انتخاب کنید)</label>
                 <div class="tag-selector">
-                    <span class="tag tag-news" data-tag="NEWS" id="tagNews">خبر</span>
-                    <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate">به‌روزرسانی</span>
-                    <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature">ویژگی</span>
-                    <span class="tag tag-fix" data-tag="FIX" id="tagFix">رفع مشکل</span>
-                    <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove">بهبود</span>
-                    <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement">اعلامیه</span>
-                    <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant">مهم</span>
-                    <span class="tag tag-tip" data-tag="TIP" id="tagTip">نکته</span>
-                    <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity">امنیتی</span>
-                    <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance">عملکرد</span>
-                    <span class="tag tag-event" data-tag="EVENT" id="tagEvent">رویداد</span>
+                    <span class="tag tag-news" data-tag="NEWS" id="tagNews"><i class="bi bi-megaphone"></i> خبر</span>
+                    <span class="tag tag-update" data-tag="UPDATE" id="tagUpdate"><i class="bi bi-arrow-clockwise"></i> به‌روزرسانی</span>
+                    <span class="tag tag-feature" data-tag="FEATURE" id="tagFeature"><i class="bi bi-stars"></i> ویژگی</span>
+                    <span class="tag tag-fix" data-tag="FIX" id="tagFix"><i class="bi bi-wrench"></i> رفع مشکل</span>
+                    <span class="tag tag-improve" data-tag="IMPROVE" id="tagImprove"><i class="bi bi-star-fill"></i> بهبود</span>
+                    <span class="tag tag-announcement" data-tag="ANNOUNCEMENT" id="tagAnnouncement"><i class="bi bi-newspaper"></i> اعلامیه</span>
+                    <span class="tag tag-important" data-tag="IMPORTANT" id="tagImportant"><i class="bi bi-exclamation-triangle"></i> مهم</span>
+                    <span class="tag tag-tip" data-tag="TIP" id="tagTip"><i class="bi bi-search"></i> نکته</span>
+                    <span class="tag tag-security" data-tag="SECURITY" id="tagSecurity"><i class="bi bi-shield-check"></i> امنیتی</span>
+                    <span class="tag tag-performance" data-tag="PERFORMANCE" id="tagPerformance"><i class="bi bi-reception-4"></i> عملکرد</span>
+                    <span class="tag tag-event" data-tag="EVENT" id="tagEvent"><i class="bi bi-cup-hot"></i> رویداد</span>
                     <span class="tag-label">انتخاب شده: <span id="selectedTagsDisplay">هیچ</span></span>
                 </div>
 
                 <div class="add-news-actions">
-                    <button class="btn btn-primary" id="addUpdateBtn">➕ افزودن خبر</button>
+                    <button class="btn btn-primary" id="addUpdateBtn"><i class="bi bi-send-plus"></i> افزودن خبر</button>
                     <button class="btn btn-outline" id="cancelAddNewsBtn">انصراف</button>
                     <span class="add-news-status" id="addNewsStatus">آماده</span>
                 </div>
